@@ -9,6 +9,7 @@ const LAUNCH_SPEED = 500
 
 
 var skull_scene = preload("res://scenes/game_object/skull/skull.tscn")
+var death_particles_scene = preload("res://scenes/effect/skeleton_death_particles.tscn")
 var is_destroying = false
 
 func _ready():
@@ -25,10 +26,17 @@ func _process(_delta):
 
 
 func destroy(start_velocity: Vector2):
+	var entities = get_tree().get_first_node_in_group("entities")
+	
 	var skull = skull_scene.instantiate() as Skull
 	skull.global_position = global_position
-	get_parent().add_child(skull)
+	entities.add_child(skull)
 	skull.start(start_velocity)
+	
+	var death_particles = death_particles_scene.instantiate() as GPUParticles2D
+	death_particles.global_position = global_position
+	entities.add_child(death_particles)
+	
 	queue_free()
 
 

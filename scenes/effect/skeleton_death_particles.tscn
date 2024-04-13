@@ -1,0 +1,98 @@
+[gd_scene load_steps=9 format=3 uid="uid://dlgq15u46lnld"]
+
+[ext_resource type="Texture2D" uid="uid://73bkfqgj6crg" path="res://assets/effect/skeleton_strip.png" id="1_achqv"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w7quq"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_id5b0"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0946372, 1), 0.0, 0.0, 0, 0, Vector2(0.646688, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_5s08d"]
+curve = SubResource("Curve_id5b0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_x6h4b"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 8.0
+direction = Vector3(0, -1, 0)
+spread = 15.0
+initial_velocity_min = 150.0
+initial_velocity_max = 350.0
+angular_velocity_min = -720.0
+angular_velocity_max = 720.0
+gravity = Vector3(0, 750, 0)
+scale_curve = SubResource("CurveTexture_5s08d")
+anim_offset_max = 1.0
+
+[sub_resource type="Animation" id="Animation_yacvj"]
+resource_name = "default"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_brkpy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1fy84"]
+_data = {
+"RESET": SubResource("Animation_brkpy"),
+"default": SubResource("Animation_yacvj")
+}
+
+[node name="SkeletonDeathParticles" type="GPUParticles2D"]
+material = SubResource("CanvasItemMaterial_w7quq")
+emitting = false
+amount = 6
+process_material = SubResource("ParticleProcessMaterial_x6h4b")
+texture = ExtResource("1_achqv")
+lifetime = 0.75
+one_shot = true
+explosiveness = 0.9
+fixed_fps = 0
+interpolate = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1fy84")
+}
+autoplay = "default"

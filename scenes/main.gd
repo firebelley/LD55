@@ -16,7 +16,8 @@ func advance_level():
 	level_index += 1
 	
 	for child in get_children():
-		child.queue_free()
+		if child is BaseLevel:
+			child.queue_free()
 		
 	level_scene.level_finished.connect(on_level_finished)
 
