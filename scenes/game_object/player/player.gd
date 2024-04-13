@@ -7,10 +7,12 @@ const MAX_SPEED = 175
 
 const stored_skull_scene = preload("res://scenes/game_object/stored_skull/stored_skull.tscn")
 const skeleton_scene = preload("res://scenes/game_object/skeleton/skeleton.tscn")
+const skeleton_launch_area = preload("res://scenes/game_object/player/skeleton_launch_area.tscn")
 
 
 @onready var skull_pickup_area: Area2D = $SkullPickupArea
 @onready var stored_skulls: Node2D = $StoredSkulls
+@onready var center_marker: Marker2D = $CenterMarker2D
 
 
 func _ready():
@@ -29,6 +31,9 @@ func _process(delta: float):
 	
 	if (Input.is_action_just_pressed("place") && stored_skulls.get_child_count() > 0):
 		summon_skeleton()
+		
+	if (Input.is_action_just_pressed("click")):
+		create_launch_area()
 
 
 func get_movement_vector() -> Vector2:
@@ -42,6 +47,13 @@ func summon_skeleton():
 	
 	if (stored_skulls.get_child_count() > 0):
 		stored_skulls.get_child(0).queue_free()
+
+
+func create_launch_area():
+	var area = skeleton_launch_area.instantiate()
+	area.direction = (get_global_mouse_position() - center_marker.global_position).normalized()
+	area.global_position = center_marker.global_position
+	get_parent().add_child(area)
 
 
 func _on_area_entered(area: Area2D):

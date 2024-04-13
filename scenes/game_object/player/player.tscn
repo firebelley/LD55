@@ -31,5 +31,8 @@ texture = ExtResource("1_o1kdt")
 centered = false
 offset = Vector2(-15, -39)
 
+[node name="CenterMarker2D" type="Marker2D" parent="."]
+position = Vector2(0, -17)
+
 [node name="StoredSkulls" type="Node2D" parent="."]
 position = Vector2(0, -16)
