@@ -9,7 +9,7 @@ const LAUNCH_SPEED = 500
 
 
 var skull_scene = preload("res://scenes/game_object/skull/skull.tscn")
-
+var is_destroying = false
 
 func _ready():
 	launch_area.area_entered.connect(on_launch_area_entered)
@@ -42,8 +42,12 @@ func on_launch_area_entered(area: Area2D):
 	
 
 func on_collision_area_entered(area: Area2D):
+	if (is_destroying):
+		return
+
 	var enemy = area.owner as Enemy
 	if (enemy == null):
 		return
 	
+	is_destroying = true
 	destroy.call_deferred(Vector2.ZERO)

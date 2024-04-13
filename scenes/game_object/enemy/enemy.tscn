@@ -14,6 +14,19 @@ size = Vector2(18, 36)
 collision_layer = 0
 script = ExtResource("1_xn20q")
 
+[node name="AttackTimer" type="Timer" parent="."]
+script = ExtResource("3_db0mt")
+max_wait_time = 3.0
+
+[node name="TargetAcquisitionTimer" type="Timer" parent="."]
+one_shot = true
+script = ExtResource("3_db0mt")
+min_wait_time = 0.25
+max_wait_time = 0.5
+
+[node name="WindupTimer" type="Timer" parent="."]
+one_shot = true
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_pdaja")
@@ -30,7 +43,3 @@ collision_mask = 16
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, -18)
 shape = SubResource("RectangleShape2D_mhqr3")
-
-[node name="AttackTimer" type="Timer" parent="."]
-script = ExtResource("3_db0mt")
-max_wait_time = 3.0
