@@ -45,7 +45,7 @@ func get_movement_vector() -> Vector2:
 
 func summon_skeleton():
 	var skeleton = skeleton_scene.instantiate()
-	skeleton.global_position = global_position
+	skeleton.global_position = global_position + global_position.direction_to(get_global_mouse_position()) * 16
 	get_parent().add_child(skeleton)
 	
 	if (stored_skulls.get_child_count() > 0):
