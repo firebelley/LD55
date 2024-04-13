@@ -1,11 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://x4cbaf3cuh3l"]
+[gd_scene load_steps=6 format=3 uid="uid://x4cbaf3cuh3l"]
 
+[ext_resource type="Script" path="res://scenes/level/base_level.gd" id="1_bivv4"]
 [ext_resource type="PackedScene" uid="uid://b7god42nq0ryl" path="res://scenes/component/spawn_component.tscn" id="1_snn1i"]
 [ext_resource type="TileSet" uid="uid://dv5pa1ptc33ql" path="res://resources/tileset.tres" id="2_j8mvv"]
 [ext_resource type="PackedScene" uid="uid://c1njxr3x6rjoa" path="res://scenes/game_object/player/player.tscn" id="3_oo5bi"]
 [ext_resource type="PackedScene" uid="uid://67cdogwg7bjc" path="res://scenes/game_object/skull/skull.tscn" id="4_rvq4b"]
 
 [node name="BaseLevel" type="Node"]
+script = ExtResource("1_bivv4")
 
 [node name="SpawnComponent" parent="." node_paths=PackedStringArray("spawn_area") instance=ExtResource("1_snn1i")]
 spawn_area = NodePath("../ReferenceRect")

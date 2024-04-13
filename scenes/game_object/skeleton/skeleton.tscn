@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c6o84wf8lqj63"]
+[gd_scene load_steps=7 format=3 uid="uid://c6o84wf8lqj63"]
 
 [ext_resource type="Script" path="res://scenes/game_object/skeleton/skeleton.gd" id="1_6huch"]
 [ext_resource type="Texture2D" uid="uid://bowl7j85n5u2h" path="res://assets/skeleton/skeleton.png" id="1_8fyb8"]
@@ -8,6 +8,9 @@ radius = 6.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mjn70"]
 size = Vector2(16, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tpuse"]
+size = Vector2(24, 32)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e53cu"]
 radius = 18.0
@@ -33,6 +36,14 @@ collision_mask = 64
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LaunchArea"]
 position = Vector2(0, -16)
 shape = SubResource("RectangleShape2D_mjn70")
+
+[node name="BlockingArea" type="Area2D" parent="."]
+collision_layer = 256
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlockingArea"]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_tpuse")
 
 [node name="CollisionArea" type="Area2D" parent="."]
 collision_layer = 16
