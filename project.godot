@@ -21,6 +21,7 @@ config/icon="res://icon.png"
 [autoload]
 
 ScreenTransition="*res://addons/node_library/scenes/ScreenTransition.tscn"
+Visuals="*res://scenes/autoload/visuals.gd"
 
 [debug]
 
@@ -32,6 +33,7 @@ window/size/viewport_width=640
 window/size/viewport_height=360
 window/size/window_width_override=1920
 window/size/window_height_override=1080
+window/stretch/mode="viewport"
 
 [dotnet]
 
