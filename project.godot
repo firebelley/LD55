@@ -131,6 +131,7 @@ click={
 2d_physics/layer_5="SkeletonHitbox"
 2d_physics/layer_6="Skull"
 2d_physics/layer_7="SkeletonLaunchArea"
+2d_physics/layer_8="Bullet"
 
 [rendering]
 

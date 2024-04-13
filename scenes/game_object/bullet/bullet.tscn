@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0sjc74un2pby"]
+
+[ext_resource type="Script" path="res://scenes/game_object/bullet/bullet.gd" id="1_n3ba4"]
+[ext_resource type="Texture2D" uid="uid://cwfdv40qlp526" path="res://assets/effect/bullet.png" id="1_v120m"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vexvn"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v5r0y"]
+radius = 5.0
+
+[node name="Bullet" type="CharacterBody2D"]
+collision_layer = 0
+motion_mode = 1
+script = ExtResource("1_n3ba4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_v120m")
+centered = false
+offset = Vector2(-9, -9)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vexvn")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_v5r0y")

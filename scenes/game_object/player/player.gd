@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody2D
 
 const ACCEL = 4000
@@ -13,11 +14,13 @@ const skeleton_launch_area = preload("res://scenes/game_object/player/skeleton_l
 @onready var skull_pickup_area: Area2D = $SkullPickupArea
 @onready var stored_skulls: Node2D = $StoredSkulls
 @onready var center_marker: Marker2D = $CenterMarker2D
+@onready var hitbox: Area2D = $Hitbox
 
 
 func _ready():
-	skull_pickup_area.area_entered.connect(_on_area_entered)
-	
+	skull_pickup_area.area_entered.connect(on_skull_pickup_area_entered)
+	hitbox.area_entered.connect(on_hitbox_area_entered)
+
 
 func _process(delta: float):
 	var movement_vector = get_movement_vector()
@@ -56,6 +59,11 @@ func create_launch_area():
 	get_parent().add_child(area)
 
 
-func _on_area_entered(area: Area2D):
+func on_skull_pickup_area_entered(area: Area2D):
 	area.owner.queue_free()
 	stored_skulls.add_child(stored_skull_scene.instantiate())
+
+
+func on_hitbox_area_entered(_area: Area2D):
+	await get_tree().physics_frame
+	get_tree().change_scene_to_file("res://scenes/main.tscn")

@@ -24,5 +24,16 @@ position = Vector2(253, 179)
 [node name="Skull" parent="Entities" instance=ExtResource("3_1kp1q")]
 position = Vector2(388, 169)
 
+[node name="Skull2" parent="Entities" instance=ExtResource("3_1kp1q")]
+position = Vector2(224, 256)
+
 [node name="Enemy" parent="Entities" instance=ExtResource("4_1k6td")]
 position = Vector2(317, 245)
+
+[node name="Enemy2" parent="Entities" instance=ExtResource("4_1k6td")]
+position = Vector2(160, 160)
+
+[node name="Enemy3" parent="Entities" instance=ExtResource("4_1k6td")]
+position = Vector2(320, 96)
+
+[node name="Foreground" type="Node2D" parent="." groups=["foreground"]]

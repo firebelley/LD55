@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://c1njxr3x6rjoa"]
+[gd_scene load_steps=6 format=3 uid="uid://c1njxr3x6rjoa"]
 
 [ext_resource type="Texture2D" uid="uid://bk3rl3syvr24o" path="res://assets/player/player.png" id="1_o1kdt"]
 [ext_resource type="Script" path="res://scenes/game_object/player/player.gd" id="1_pglt4"]
@@ -6,10 +6,13 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_dj8pn"]
 radius = 6.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hynwr"]
+size = Vector2(12, 20)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1ge70"]
 size = Vector2(26, 36)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 0
 motion_mode = 1
 script = ExtResource("1_pglt4")
@@ -17,6 +20,14 @@ script = ExtResource("1_pglt4")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_dj8pn")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -14)
+shape = SubResource("RectangleShape2D_hynwr")
 
 [node name="SkullPickupArea" type="Area2D" parent="."]
 position = Vector2(0, -17)
