@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://h3b2uvw5141l"]
+
+[ext_resource type="Script" path="res://scenes/game_object/stored_skull/stored_skull.gd" id="1_0j7py"]
+[ext_resource type="Texture2D" uid="uid://bfdujrs20vw1k" path="res://assets/skull/skull.png" id="1_yfl2m"]
+
+[sub_resource type="Animation" id="Animation_04nvi"]
+resource_name = "default"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RotationRoot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_ivpwo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RotationRoot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qw78w"]
+_data = {
+"RESET": SubResource("Animation_ivpwo"),
+"default": SubResource("Animation_04nvi")
+}
+
+[node name="StoredSkull" type="Node2D"]
+script = ExtResource("1_0j7py")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qw78w")
+}
+autoplay = "default"
+
+[node name="RotationRoot" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="RotationRoot"]
+unique_name_in_owner = true
+position = Vector2(32, 0)
+texture = ExtResource("1_yfl2m")
+centered = false
+offset = Vector2(-8, -9)
