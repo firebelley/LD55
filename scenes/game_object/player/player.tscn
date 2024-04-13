@@ -1,21 +1,189 @@
-[gd_scene load_steps=6 format=3 uid="uid://c1njxr3x6rjoa"]
+[gd_scene load_steps=12 format=3 uid="uid://c1njxr3x6rjoa"]
 
-[ext_resource type="Texture2D" uid="uid://bk3rl3syvr24o" path="res://assets/player/player.png" id="1_o1kdt"]
 [ext_resource type="Script" path="res://scenes/game_object/player/player.gd" id="1_pglt4"]
+[ext_resource type="Texture2D" uid="uid://bwnh4da4be3up" path="res://assets/player/head.png" id="2_ylwyp"]
+[ext_resource type="Texture2D" uid="uid://diaspnpprvpbt" path="res://assets/player/body.png" id="3_2c0rn"]
+[ext_resource type="Texture2D" uid="uid://cmic6s4wr4esg" path="res://assets/player/arm_left.png" id="4_0tj38"]
+[ext_resource type="Texture2D" uid="uid://p6xal0aanef0" path="res://assets/player/arm_right.png" id="5_gqdsd"]
+
+[sub_resource type="Animation" id="Animation_cwegp"]
+resource_name = "run"
+length = 0.5
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/ArmLeft:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-1.309, -1.8326]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/ArmLeft:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-2, -16)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/ArmRight:rotation")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-1.309, -1.8326]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visuals/Head:rotation")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -0.261799, 0.261799]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Visuals/Body:rotation")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.35),
+"transitions": PackedFloat32Array(1, 0.378929, 1),
+"update": 0,
+"values": [0.0, 0.174533, -0.174533]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Visuals/Body:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0.7)]
+}
+
+[sub_resource type="Animation" id="Animation_gkpci"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/ArmLeft:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/ArmLeft:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-6, -16)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/ArmRight:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visuals/Head:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Visuals/Body:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Visuals/Body:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u07t8"]
+_data = {
+"RESET": SubResource("Animation_gkpci"),
+"run": SubResource("Animation_cwegp")
+}
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dj8pn"]
 radius = 6.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ge70"]
-size = Vector2(26, 36)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hynwr"]
 size = Vector2(12, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ge70"]
+size = Vector2(26, 36)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 0
 motion_mode = 1
 script = ExtResource("1_pglt4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_u07t8")
+}
+autoplay = "run"
 
 [node name="DodgeTimer" type="Timer" parent="."]
 wait_time = 0.3
@@ -25,19 +193,6 @@ one_shot = true
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_dj8pn")
 
-[node name="SkullPickupArea" type="Area2D" parent="."]
-position = Vector2(0, -17)
-collision_layer = 0
-collision_mask = 32
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SkullPickupArea"]
-shape = SubResource("RectangleShape2D_1ge70")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_o1kdt")
-centered = false
-offset = Vector2(-15, -39)
-
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 128
@@ -46,6 +201,41 @@ collision_mask = 128
 unique_name_in_owner = true
 position = Vector2(0, -14)
 shape = SubResource("RectangleShape2D_hynwr")
+
+[node name="SkullPickupArea" type="Area2D" parent="."]
+position = Vector2(0, -17)
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SkullPickupArea"]
+shape = SubResource("RectangleShape2D_1ge70")
+
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="Head" type="Sprite2D" parent="Visuals"]
+position = Vector2(0, -22)
+texture = ExtResource("2_ylwyp")
+centered = false
+offset = Vector2(-7, -13)
+
+[node name="ArmRight" type="Sprite2D" parent="Visuals"]
+position = Vector2(7, -16)
+scale = Vector2(1, 1)
+texture = ExtResource("5_gqdsd")
+centered = false
+offset = Vector2(-3, -3)
+
+[node name="Body" type="Sprite2D" parent="Visuals"]
+position = Vector2(0, -15)
+texture = ExtResource("3_2c0rn")
+centered = false
+offset = Vector2(-8, -5)
+
+[node name="ArmLeft" type="Sprite2D" parent="Visuals"]
+position = Vector2(-6, -16)
+texture = ExtResource("4_0tj38")
+centered = false
+offset = Vector2(-5, -3)
 
 [node name="CenterMarker2D" type="Marker2D" parent="."]
 position = Vector2(0, -17)

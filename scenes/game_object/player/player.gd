@@ -18,6 +18,8 @@ const skeleton_launch_area = preload("res://scenes/game_object/player/skeleton_l
 @onready var hitbox: Area2D = $Hitbox
 @onready var dodge_timer: Timer = $DodgeTimer
 @onready var hitbox_collision_shape: CollisionShape2D = %HitboxCollisionShape
+@onready var visuals: Node2D = $Visuals
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var dodge_direction = Vector2.ZERO
 
@@ -48,7 +50,17 @@ func process_normal(delta: float):
 	
 	if (is_equal_approx(movement_vector.length_squared(), 0)):
 		velocity = velocity.lerp(Vector2.ZERO, 1.0 - exp(-DECEL * delta))
-		
+	
+	var scale_mod = 1
+	if (get_global_mouse_position().x < global_position.x):
+		scale_mod = -1
+	visuals.scale.x = scale_mod
+	
+	if (is_equal_approx(movement_vector.length_squared(), 0)):
+		animation_player.play("RESET")
+	else:
+		animation_player.play("run")
+	
 	move_and_slide()
 		
 	if (Input.is_action_just_pressed("click")):
