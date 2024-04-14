@@ -55,7 +55,7 @@ uppercase = true
 position = Vector2(160, 214)
 
 [node name="Skull" parent="Entities" index="1"]
-position = Vector2(415, 220)
+position = Vector2(312, 205)
 
 [node name="Enemy" parent="Entities" index="2" instance=ExtResource("2_v5daw")]
 position = Vector2(458, 216)
