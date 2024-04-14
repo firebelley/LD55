@@ -10,6 +10,7 @@ func _ready():
 
 func advance_level():
 	if (level_sequence.size() <= level_index):
+		ScreenTransition.transition_to_scene("res://scenes/ui/outroduction.tscn")
 		return
 	
 	if (level_index > 0):

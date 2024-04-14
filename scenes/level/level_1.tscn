@@ -30,6 +30,24 @@ in mouse direction"
 horizontal_alignment = 1
 uppercase = true
 
+[node name="Label3" type="Label" parent="." index="6"]
+offset_left = 342.0
+offset_top = 320.0
+offset_right = 494.0
+offset_bottom = 353.0
+text = "ESC to fullscreen/Window"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="Label4" type="Label" parent="." index="7"]
+offset_left = 480.0
+offset_top = 320.0
+offset_right = 632.0
+offset_bottom = 353.0
+text = "M to Mute audio"
+horizontal_alignment = 1
+uppercase = true
+
 [node name="Player" parent="Entities" index="0"]
 position = Vector2(160, 214)
 
