@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://c6o84wf8lqj63"]
+[gd_scene load_steps=15 format=3 uid="uid://c6o84wf8lqj63"]
 
 [ext_resource type="Script" path="res://scenes/game_object/skeleton/skeleton.gd" id="1_6huch"]
+[ext_resource type="Texture2D" uid="uid://bal0amvmjdvl8" path="res://assets/effect/arrow.png" id="2_itbqq"]
 [ext_resource type="Texture2D" uid="uid://vseqdust5p8n" path="res://assets/skeleton/head.png" id="2_sflr3"]
 [ext_resource type="Texture2D" uid="uid://dim8pou6nr87d" path="res://assets/skeleton/body.png" id="3_7dgyw"]
 [ext_resource type="Texture2D" uid="uid://jjl16dqp4sx" path="res://assets/skeleton/arm_left.png" id="4_mrn03"]
@@ -254,6 +255,16 @@ libraries = {
 "": SubResource("AnimationLibrary_ko48u")
 }
 autoplay = "idle"
+
+[node name="ArrowRoot" type="Node2D" parent="."]
+position = Vector2(0, -16)
+
+[node name="ArrowSprite" type="Sprite2D" parent="ArrowRoot"]
+unique_name_in_owner = true
+position = Vector2(15, 0)
+texture = ExtResource("2_itbqq")
+centered = false
+offset = Vector2(-2, -8)
 
 [node name="CollisionArea" type="Area2D" parent="."]
 collision_layer = 16

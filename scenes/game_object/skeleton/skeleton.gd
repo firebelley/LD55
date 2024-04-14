@@ -7,6 +7,8 @@ const LAUNCH_SPEED = 500
 @onready var collision_area: Area2D = $CollisionArea
 @onready var collision_area_shape: CollisionShape2D = %CollisionAreaShape
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var arrow_sprite: Sprite2D = %ArrowSprite
+@onready var arrow_root: Node2D = $ArrowRoot
 
 
 var death_particles_scene = preload("res://scenes/effect/skeleton_death_particles.tscn")
@@ -23,6 +25,8 @@ func _process(_delta):
 	var collision = get_last_slide_collision()
 	if (collision != null):
 		destroy(velocity)
+		
+	update_arrow()
 
 
 func destroy(start_velocity: Vector2):
@@ -39,6 +43,21 @@ func destroy(start_velocity: Vector2):
 	entities.add_child(death_particles)
 	
 	queue_free()
+
+
+func update_arrow():
+	var player = get_tree().get_first_node_in_group("player") as Player
+	if (player == null):
+		arrow_sprite.visible = false
+		return
+	
+	if (player.center_marker.global_position.distance_to(arrow_root.global_position) < 32):
+		arrow_sprite.visible = true
+	else:
+		arrow_sprite.visible = false
+	
+	var direction = (get_global_mouse_position() - player.center_marker.global_position).normalized()
+	arrow_root.rotation = direction.angle()
 
 
 func on_launch_area_entered(area: Area2D):
