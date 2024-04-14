@@ -56,7 +56,7 @@ func on_collision_area_entered(area: Area2D):
 	if (is_destroying):
 		return
 
-	var enemy = area.owner as Enemy
+	var enemy = area.owner as Node2D
 	if (enemy == null):
 		return
 	

@@ -41,7 +41,7 @@ func spawn():
 	var pos = Vector2(x, y)
 	
 	var entities_node = get_tree().get_first_node_in_group("entities")
-	var enemy = enemy_scenes[0].instantiate() as Enemy
+	var enemy = enemy_scenes[0].instantiate() as Node2D
 	enemy.global_position = pos
 	entities_node.add_child(enemy)
 
