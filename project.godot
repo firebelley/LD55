@@ -16,7 +16,11 @@ config/use_custom_user_dir=true
 config/custom_user_dir_name="Game"
 config/features=PackedStringArray("4.2")
 run/max_fps=240
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/show_image=false
+boot_splash/use_filter=false
 config/icon="res://icon.png"
+config/windows_native_icon="res://icon.ico"
 
 [autoload]
 
