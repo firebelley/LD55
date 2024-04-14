@@ -3,9 +3,9 @@ extends CharacterBody2D
 
 const ACCEL = 4000
 const DECEL = 35
-const MAX_SPEED = 175
-const DODGE_SPEED = 500
-const DODGE_DECELERATION = 100
+const MAX_SPEED = 160
+const DODGE_SPEED = 800
+const DODGE_DECELERATION = 500
 
 
 const stored_skull_scene = preload("res://scenes/game_object/stored_skull/stored_skull.tscn")
@@ -20,6 +20,7 @@ const skeleton_launch_area = preload("res://scenes/game_object/player/skeleton_l
 @onready var hitbox_collision_shape: CollisionShape2D = %HitboxCollisionShape
 @onready var visuals: Node2D = $Visuals
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var dodge_animation_player: AnimationPlayer = $DodgeAnimationPlayer
 
 var dodge_direction = Vector2.ZERO
 
@@ -35,6 +36,7 @@ func _process(delta: float):
 		hitbox_collision_shape.disabled = true
 		dodge_timer.start()
 		dodge_direction = get_movement_vector().normalized()
+		dodge_animation_player.play("dodge")
 		velocity = dodge_direction * DODGE_SPEED
 	
 	if (!dodge_timer.is_stopped()):
@@ -71,6 +73,8 @@ func process_dodge(_delta: float):
 	if (velocity.length() < MAX_SPEED):
 		dodge_timer.stop()
 		hitbox_collision_shape.disabled = false
+		if dodge_animation_player.is_playing():
+			dodge_animation_player.play("RESET")
 
 	var percent_through_dodge = 1 - (dodge_timer.time_left / dodge_timer.wait_time)
 	
@@ -109,4 +113,3 @@ func on_hitbox_area_entered(_area: Area2D):
 
 func on_dodge_timer_timeout():
 	hitbox_collision_shape.disabled = false
-

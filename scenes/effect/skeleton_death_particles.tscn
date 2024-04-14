@@ -20,7 +20,7 @@ particle_flag_disable_z = true
 emission_shape = 1
 emission_sphere_radius = 8.0
 direction = Vector3(0, -1, 0)
-spread = 15.0
+spread = 25.0
 initial_velocity_min = 150.0
 initial_velocity_max = 350.0
 angular_velocity_min = -720.0
@@ -82,7 +82,6 @@ _data = {
 [node name="SkeletonDeathParticles" type="GPUParticles2D"]
 material = SubResource("CanvasItemMaterial_w7quq")
 emitting = false
-amount = 6
 process_material = SubResource("ParticleProcessMaterial_x6h4b")
 texture = ExtResource("1_achqv")
 lifetime = 0.75
