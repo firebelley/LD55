@@ -29,7 +29,9 @@ func _ready():
 	attack_timer.timeout.connect(on_attack_timer_timeout)
 	windup_timer.timeout.connect(on_windup_timer_timeout)
 	hitbox.area_entered.connect(on_area_entered)
-	attack_timer.start_random()
+	
+	if (!disable_ai):
+		attack_timer.start_random()
 
 
 func _process(delta):

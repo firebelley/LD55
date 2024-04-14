@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7nqa2q762wpf"]
+
+[ext_resource type="Script" path="res://scenes/component/enemy_spawn_definition_component.gd" id="1_wni25"]
+
+[node name="EnemySpawnDefinitionComponent" type="Node"]
+script = ExtResource("1_wni25")
+
+[node name="StartDelayTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="SpawnTimer" type="Timer" parent="."]
