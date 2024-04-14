@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://bbmm6vh40u6kh"]
+[gd_scene load_steps=14 format=3 uid="uid://bbmm6vh40u6kh"]
 
 [ext_resource type="Script" path="res://scenes/game_object/enemy/enemy.gd" id="1_xn20q"]
 [ext_resource type="Script" path="res://addons/node_library/scripts/random_timer.gd" id="3_db0mt"]
 [ext_resource type="Texture2D" uid="uid://bwqger12xmq57" path="res://assets/enemy/arm_left.png" id="4_afay8"]
 [ext_resource type="Texture2D" uid="uid://8rr8j0a5e7eg" path="res://assets/enemy/arm_right.png" id="5_sh65k"]
 [ext_resource type="Texture2D" uid="uid://cr3ub68u42clr" path="res://assets/enemy/body.png" id="6_3py1o"]
+[ext_resource type="PackedScene" uid="uid://bepn3wm1qex72" path="res://scenes/effect/enemy_spawn_particles.tscn" id="7_ebwqj"]
 [ext_resource type="Texture2D" uid="uid://dsvnhpe5tneug" path="res://assets/enemy/head.png" id="7_jer7q"]
 
 [sub_resource type="Animation" id="Animation_scfbe"]
@@ -12,7 +13,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Visuals/Head:rotation")
+tracks/0/path = NodePath("Visuals/Root/Head:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -24,7 +25,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Visuals/ArmLeft:rotation")
+tracks/1/path = NodePath("Visuals/Root/ArmLeft:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -36,7 +37,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Visuals/Body:rotation")
+tracks/2/path = NodePath("Visuals/Root/Body:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -44,6 +45,30 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Visuals/Root:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_bv3vl"]
@@ -54,7 +79,7 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Visuals/Head:rotation")
+tracks/0/path = NodePath("Visuals/Root/Head:rotation")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -66,7 +91,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Visuals/ArmLeft:rotation")
+tracks/1/path = NodePath("Visuals/Root/ArmLeft:rotation")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -78,7 +103,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Visuals/Body:rotation")
+tracks/2/path = NodePath("Visuals/Root/Body:rotation")
 tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -88,10 +113,38 @@ tracks/2/keys = {
 "values": [0.0, 0.0872665, -0.0872665]
 }
 
+[sub_resource type="Animation" id="Animation_b3rvq"]
+resource_name = "spawn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/Root:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(5.65685, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1.2, 1.2), Vector2(0.9, 0.9), Vector2(1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ig5b7"]
 _data = {
 "RESET": SubResource("Animation_scfbe"),
-"run": SubResource("Animation_bv3vl")
+"run": SubResource("Animation_bv3vl"),
+"spawn": SubResource("Animation_b3rvq")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pdaja"]
@@ -108,6 +161,7 @@ script = ExtResource("1_xn20q")
 libraries = {
 "": SubResource("AnimationLibrary_ig5b7")
 }
+autoplay = "spawn"
 
 [node name="AttackTimer" type="Timer" parent="."]
 script = ExtResource("3_db0mt")
@@ -131,32 +185,34 @@ position = Vector2(0, -12)
 
 [node name="Visuals" type="Node2D" parent="."]
 
-[node name="Head" type="Sprite2D" parent="Visuals"]
+[node name="Root" type="Node2D" parent="Visuals"]
+
+[node name="Head" type="Sprite2D" parent="Visuals/Root"]
 position = Vector2(0, -19)
 texture = ExtResource("7_jer7q")
 centered = false
 offset = Vector2(-9, -18)
 
-[node name="Body" type="Sprite2D" parent="Visuals"]
+[node name="Body" type="Sprite2D" parent="Visuals/Root"]
 position = Vector2(0, -9)
 texture = ExtResource("6_3py1o")
 centered = false
 offset = Vector2(-6, -7)
 
-[node name="ArmLeft" type="Sprite2D" parent="Visuals"]
+[node name="ArmLeft" type="Sprite2D" parent="Visuals/Root"]
 position = Vector2(-5, -14)
 texture = ExtResource("4_afay8")
 centered = false
 offset = Vector2(-5, -2)
 
-[node name="ArmRight" type="Sprite2D" parent="Visuals"]
+[node name="ArmRight" type="Sprite2D" parent="Visuals/Root"]
 unique_name_in_owner = true
 position = Vector2(6, -14)
 texture = ExtResource("5_sh65k")
 centered = false
 offset = Vector2(-3, -5)
 
-[node name="BarrelMarker2D" type="Marker2D" parent="Visuals/ArmRight"]
+[node name="BarrelMarker2D" type="Marker2D" parent="Visuals/Root/ArmRight"]
 unique_name_in_owner = true
 position = Vector2(13, 1)
 
@@ -168,3 +224,5 @@ collision_mask = 16
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, -18)
 shape = SubResource("RectangleShape2D_mhqr3")
+
+[node name="EnemySpawnParticles" parent="." instance=ExtResource("7_ebwqj")]

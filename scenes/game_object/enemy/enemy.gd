@@ -39,7 +39,7 @@ func _ready():
 
 
 func _process(delta):
-	if (disable_ai):
+	if (disable_ai || (animation_player.current_animation == "spawn" && animation_player.is_playing())):
 		return
 	acquire_target_position()
 	var player = get_tree().get_first_node_in_group("player") as Player

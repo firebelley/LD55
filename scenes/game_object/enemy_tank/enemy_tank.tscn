@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bt2xr3v0vltbj"]
+[gd_scene load_steps=15 format=3 uid="uid://bt2xr3v0vltbj"]
 
 [ext_resource type="Texture2D" uid="uid://chu26joch3i5g" path="res://assets/enemy_tank/head.png" id="1_68ggd"]
 [ext_resource type="Script" path="res://scenes/game_object/enemy_tank/enemy_tank.gd" id="1_ggktp"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://addons/node_library/scripts/random_timer.gd" id="2_lpalb"]
 [ext_resource type="Texture2D" uid="uid://c12p3aaab5q32" path="res://assets/enemy_tank/arm_right.png" id="4_nmug6"]
 [ext_resource type="Texture2D" uid="uid://cxss0dll0xpqh" path="res://assets/enemy_tank/arm.png" id="5_wl6u6"]
+[ext_resource type="PackedScene" uid="uid://bepn3wm1qex72" path="res://scenes/effect/enemy_spawn_particles.tscn" id="7_auueg"]
 
 [sub_resource type="Animation" id="Animation_vjh1j"]
 length = 0.001
@@ -44,6 +45,30 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Visuals/Root:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_kb6pe"]
@@ -130,10 +155,38 @@ tracks/2/keys = {
 "values": [Vector2(1, 1), Vector2(0.9, 1.1)]
 }
 
+[sub_resource type="Animation" id="Animation_u2phy"]
+resource_name = "spawn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/Root:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(5.65685, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1.2, 1.2), Vector2(0.9, 0.9), Vector2(1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3ut0c"]
 _data = {
 "RESET": SubResource("Animation_vjh1j"),
 "run": SubResource("Animation_kb6pe"),
+"spawn": SubResource("Animation_u2phy"),
 "stun": SubResource("Animation_1f71s")
 }
 
@@ -152,6 +205,7 @@ script = ExtResource("1_ggktp")
 libraries = {
 "": SubResource("AnimationLibrary_3ut0c")
 }
+autoplay = "spawn"
 
 [node name="AttackTimer" type="Timer" parent="."]
 script = ExtResource("2_lpalb")
@@ -218,3 +272,5 @@ offset = Vector2(-5, -2)
 [node name="BarrelMarker2D" type="Marker2D" parent="Visuals/Root/ArmLeft"]
 unique_name_in_owner = true
 position = Vector2(16, 4)
+
+[node name="EnemySpawnParticles" parent="." instance=ExtResource("7_auueg")]

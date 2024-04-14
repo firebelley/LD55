@@ -1,0 +1,76 @@
+[gd_scene load_steps=8 format=3 uid="uid://bepn3wm1qex72"]
+
+[ext_resource type="Texture2D" uid="uid://cvual36rlipog" path="res://assets/effect/tractor_beam.png" id="1_u84xr"]
+
+[sub_resource type="Animation" id="Animation_ea8ua"]
+resource_name = "default"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_ybqey"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_845v8"]
+_data = {
+"RESET": SubResource("Animation_ybqey"),
+"default": SubResource("Animation_ea8ua")
+}
+
+[sub_resource type="Curve" id="Curve_ipqyo"]
+_data = [Vector2(0, 0.032967), 0.0, 2.91209, 0, 0, Vector2(1, 1), -1.73287, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_5662w"]
+curve = SubResource("Curve_ipqyo")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_d1xyq"]
+particle_flag_disable_z = true
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = 90.0
+initial_velocity_max = 90.0
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_5662w")
+
+[node name="EnemySpawnParticles" type="Node2D"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_845v8")
+}
+autoplay = "default"
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(0, -48)
+emitting = false
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_d1xyq")
+texture = ExtResource("1_u84xr")
+lifetime = 0.5
+fixed_fps = 0
+interpolate = false

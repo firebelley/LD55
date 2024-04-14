@@ -35,6 +35,9 @@ func _ready():
 
 
 func _process(delta):
+	if (animation_player.current_animation == "spawn" && animation_player.is_playing()):
+		return
+
 	if (!stun_timer.is_stopped()):
 		velocity = velocity.lerp(Vector2.ZERO, 1.0 - exp(-DECEL * delta))
 		move_and_slide()
