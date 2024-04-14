@@ -12,6 +12,7 @@ const DODGE_DECELERATION = 500
 
 const skeleton_launch_area = preload("res://scenes/game_object/player/skeleton_launch_area.tscn")
 const push_particles = preload("res://scenes/effect/push_particles.tscn")
+const death_particles = preload("res://scenes/effect/player_death_particles.tscn")
 
 
 @onready var skull_pickup_area: Area2D = $SkullPickupArea
@@ -105,12 +106,17 @@ func create_launch_area():
 	play_dodge()
 
 
-func on_hitbox_area_entered(_area: Area2D):
-	if (get_tree().current_scene.scene_file_path.contains("level_")):
-		await get_tree().physics_frame
-		get_tree().change_scene_to_file(get_tree().current_scene.scene_file_path)
-	else:
-		killed.emit()
+func on_hitbox_area_entered(area: Area2D):
+	var bullet = area.owner as Bullet
+	if (bullet != null):
+		bullet.destroy()
+
+	killed.emit()
+	
+	var particles = death_particles.instantiate() as Node2D
+	get_tree().get_first_node_in_group("entities").add_child(particles)
+	particles.global_position = center_marker.global_position
+	queue_free()
 
 
 func on_dodge_timer_timeout():

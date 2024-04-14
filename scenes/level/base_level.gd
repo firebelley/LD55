@@ -39,7 +39,11 @@ func on_finished():
 	
 
 func on_player_killed():
-	level_failed.emit()
+	await get_tree().create_timer(.5).timeout
+	var message_banner = message_banner_scene.instantiate() as MessageBanner
+	add_child(message_banner)
+	message_banner.play_death()
+	message_banner.finished.connect(on_death_message_banner_finished)
 
 
 func on_final_message_banner_finished():
@@ -48,3 +52,11 @@ func on_final_message_banner_finished():
 
 func on_intro_message_banner_finished():
 	start_spawning()
+
+
+func on_death_message_banner_finished():
+	if (get_tree().current_scene.scene_file_path.contains("level_")):
+		await get_tree().physics_frame
+		get_tree().change_scene_to_file(get_tree().current_scene.scene_file_path)
+	else:
+		level_failed.emit()

@@ -29,7 +29,7 @@ func start(initial_velocity: Vector2):
 
 func summon_skeleton():
 	var skeleton = skeleton_scene.instantiate()
-	skeleton.global_position = global_position
+	skeleton.global_position = global_position + (Vector2.DOWN * 4)
 	get_parent().add_child(skeleton)
 
 

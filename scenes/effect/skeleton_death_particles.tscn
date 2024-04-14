@@ -16,6 +16,7 @@ point_count = 4
 curve = SubResource("Curve_id5b0")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_x6h4b"]
+lifetime_randomness = 0.25
 particle_flag_disable_z = true
 emission_shape = 1
 emission_sphere_radius = 8.0

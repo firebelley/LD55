@@ -16,12 +16,16 @@ func _process(_delta):
 	move_and_slide()
 	
 	if (get_last_slide_collision() != null):
-		queue_free()
+		destroy()
 
 
 func start(direction: Vector2):
 	velocity = direction * SPEED
 
 
-func on_area_entered(_area: Area2D):
+func destroy():
 	queue_free()
+
+
+func on_area_entered(_area: Area2D):
+	destroy()

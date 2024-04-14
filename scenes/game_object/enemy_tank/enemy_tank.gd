@@ -44,9 +44,9 @@ func _process(delta):
 		return
 		
 	acquire_target_position()
-	var player = get_tree().get_first_node_in_group("player") as Player
 	var movement_direction = global_position.direction_to(current_target_position)
 	
+	var player = get_tree().get_first_node_in_group("player") as Player
 	if (player != null):
 		var old_rotation = arm_left.rotation
 		arm_left.look_at(player.center_marker.global_position)
@@ -90,10 +90,10 @@ func attack():
 
 
 func acquire_target_position():
-	if (!target_acquisition_timer.is_stopped()):
-		return
-	
 	var player = get_tree().get_first_node_in_group("player") as Player
+	if (!target_acquisition_timer.is_stopped() || player == null):
+		return
+
 	var movement_direction = global_position.direction_to(player.global_position)
 	var distance_to_player = player.global_position.distance_to(global_position)
 	
