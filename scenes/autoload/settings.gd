@@ -2,6 +2,7 @@ extends Node
 
 
 func _ready():
+	get_window().min_size = Vector2(640, 360)
 	if (!OS.has_feature("web") && !OS.is_debug_build()):
 		get_window().mode = Window.MODE_FULLSCREEN
 		get_window().borderless = true
