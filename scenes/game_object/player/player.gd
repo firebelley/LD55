@@ -11,6 +11,7 @@ const DODGE_DECELERATION = 500
 const stored_skull_scene = preload("res://scenes/game_object/stored_skull/stored_skull.tscn")
 const skeleton_scene = preload("res://scenes/game_object/skeleton/skeleton.tscn")
 const skeleton_launch_area = preload("res://scenes/game_object/player/skeleton_launch_area.tscn")
+const push_particles = preload("res://scenes/effect/push_particles.tscn")
 
 
 @onready var skull_pickup_area: Area2D = $SkullPickupArea
@@ -36,7 +37,7 @@ func _process(delta: float):
 		hitbox_collision_shape.disabled = true
 		dodge_timer.start()
 		dodge_direction = get_movement_vector().normalized()
-		dodge_animation_player.play("dodge")
+		play_dodge()
 		velocity = dodge_direction * DODGE_SPEED
 	
 	if (!dodge_timer.is_stopped()):
@@ -95,10 +96,19 @@ func summon_skeleton(at_position: Vector2):
 
 
 func create_launch_area():
+	var foreground = get_tree().get_first_node_in_group("foreground")
+	
 	var area = skeleton_launch_area.instantiate()
 	area.direction = (get_global_mouse_position() - center_marker.global_position).normalized()
 	area.global_position = center_marker.global_position
-	get_parent().add_child(area)
+	foreground.add_child(area)
+	
+	var particles = push_particles.instantiate() as Node2D
+	particles.global_position = area.global_position + area.direction * 16
+	particles.rotation = area.direction.angle()
+	foreground.add_child(particles)
+	
+	play_dodge()
 
 
 func on_skull_pickup_area_entered(area: Area2D):
@@ -113,3 +123,9 @@ func on_hitbox_area_entered(_area: Area2D):
 
 func on_dodge_timer_timeout():
 	hitbox_collision_shape.disabled = false
+
+
+func play_dodge():
+	if dodge_animation_player.is_playing():
+		dodge_animation_player.seek(0, true)
+	dodge_animation_player.play("dodge")
