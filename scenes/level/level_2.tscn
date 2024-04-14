@@ -10,3 +10,10 @@
 spawn_lifetime = 15.0
 enemy_scene = ExtResource("2_gbcmj")
 total_to_spawn = 5
+
+[node name="Label" type="Label" parent="." index="4"]
+offset_left = 256.0
+offset_top = 256.0
+offset_right = 371.0
+offset_bottom = 271.0
+text = "PRESS SPACE TO DODGE"
