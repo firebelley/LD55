@@ -6,6 +6,7 @@ const LAUNCH_SPEED = 500
 @onready var launch_area: Area2D = $LaunchArea
 @onready var collision_area: Area2D = $CollisionArea
 @onready var collision_area_shape: CollisionShape2D = %CollisionAreaShape
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
 var skull_scene = preload("res://scenes/game_object/skull/skull.tscn")
@@ -47,7 +48,9 @@ func on_launch_area_entered(area: Area2D):
 	
 	velocity = skeleton_launch_area.direction * LAUNCH_SPEED
 	collision_area_shape.set_deferred("disabled", false)
-	
+	animation_player.play("RESET")
+	animation_player.queue("launch")
+
 
 func on_collision_area_entered(area: Area2D):
 	if (is_destroying):
