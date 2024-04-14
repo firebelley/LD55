@@ -1,12 +1,50 @@
-[gd_scene load_steps=13 format=3 uid="uid://bbmm6vh40u6kh"]
+[gd_scene load_steps=12 format=3 uid="uid://bbmm6vh40u6kh"]
 
-[ext_resource type="Texture2D" uid="uid://c7kqceao1te3b" path="res://assets/enemy/enemy.png" id="1_332r5"]
 [ext_resource type="Script" path="res://scenes/game_object/enemy/enemy.gd" id="1_xn20q"]
 [ext_resource type="Script" path="res://addons/node_library/scripts/random_timer.gd" id="3_db0mt"]
 [ext_resource type="Texture2D" uid="uid://bwqger12xmq57" path="res://assets/enemy/arm_left.png" id="4_afay8"]
 [ext_resource type="Texture2D" uid="uid://8rr8j0a5e7eg" path="res://assets/enemy/arm_right.png" id="5_sh65k"]
 [ext_resource type="Texture2D" uid="uid://cr3ub68u42clr" path="res://assets/enemy/body.png" id="6_3py1o"]
 [ext_resource type="Texture2D" uid="uid://dsvnhpe5tneug" path="res://assets/enemy/head.png" id="7_jer7q"]
+
+[sub_resource type="Animation" id="Animation_scfbe"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/Head:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/ArmLeft:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/Body:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_bv3vl"]
 resource_name = "run"
@@ -50,45 +88,6 @@ tracks/2/keys = {
 "values": [0.0, 0.0872665, -0.0872665]
 }
 
-[sub_resource type="Animation" id="Animation_scfbe"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Visuals/Head:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Visuals/ArmLeft:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Visuals/Body:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ig5b7"]
 _data = {
 "RESET": SubResource("Animation_scfbe"),
@@ -126,12 +125,6 @@ one_shot = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_pdaja")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("1_332r5")
-centered = false
-offset = Vector2(-11, -39)
 
 [node name="Visuals" type="Node2D" parent="."]
 
