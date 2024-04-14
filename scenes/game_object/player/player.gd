@@ -1,6 +1,8 @@
 class_name Player
 extends CharacterBody2D
 
+signal killed
+
 const ACCEL = 4000
 const DECEL = 35
 const MAX_SPEED = 160
@@ -104,8 +106,11 @@ func create_launch_area():
 
 
 func on_hitbox_area_entered(_area: Area2D):
-	await get_tree().physics_frame
-	get_tree().change_scene_to_file("res://scenes/main.tscn")
+	if (get_tree().current_scene.scene_file_path.contains("level_")):
+		await get_tree().physics_frame
+		get_tree().change_scene_to_file(get_tree().current_scene.scene_file_path)
+	else:
+		killed.emit()
 
 
 func on_dodge_timer_timeout():

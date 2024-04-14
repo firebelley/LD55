@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://c15wpk27gi4qr"]
+
+[ext_resource type="PackedScene" uid="uid://x4cbaf3cuh3l" path="res://scenes/level/base_level.tscn" id="1_g7epy"]
+[ext_resource type="PackedScene" uid="uid://bbmm6vh40u6kh" path="res://scenes/game_object/enemy/enemy.tscn" id="2_qbaqi"]
+
+[node name="Level3" instance=ExtResource("1_g7epy")]
+
+[node name="SpawnComponent" parent="." index="0"]
+total_enemies_to_spawn = 15
+total_level_time = 30.0
+enemy_scenes = Array[PackedScene]([ExtResource("2_qbaqi")])

@@ -3,20 +3,9 @@
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_dngbe"]
 [ext_resource type="PackedScene" uid="uid://dl2oyp16okd77" path="res://scenes/level/level_1.tscn" id="2_m8hq6"]
 [ext_resource type="PackedScene" uid="uid://iixkem6656pc" path="res://scenes/level/level_2.tscn" id="3_5jk7b"]
-[ext_resource type="Script" path="res://addons/node_library/scripts/shaky_camera_2d.gd" id="4_e552r"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_rt2e3"]
-noise_type = 3
-seed = -251960452
-fractal_octaves = 1
+[ext_resource type="PackedScene" uid="uid://c15wpk27gi4qr" path="res://scenes/level/level_3.tscn" id="4_054n3"]
+[ext_resource type="PackedScene" uid="uid://b6jrueyar0fue" path="res://scenes/level/level_4.tscn" id="5_kftt0"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_dngbe")
-level_sequence = Array[PackedScene]([ExtResource("2_m8hq6"), ExtResource("3_5jk7b")])
-
-[node name="ShakyCamera2D" type="Camera2D" parent="." groups=["camera"]]
-anchor_mode = 0
-script = ExtResource("4_e552r")
-shake_noise = SubResource("FastNoiseLite_rt2e3")
-max_shake_offset = 8.0
-frequency_multiplier = 1500.0
+level_sequence = Array[PackedScene]([ExtResource("2_m8hq6"), ExtResource("3_5jk7b"), ExtResource("4_054n3"), ExtResource("5_kftt0")])

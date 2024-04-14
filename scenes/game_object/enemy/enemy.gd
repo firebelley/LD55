@@ -20,6 +20,7 @@ const MAX_TARGET_DISTANCE = 200
 
 const bullet_scene = preload("res://scenes/game_object/bullet/bullet.tscn")
 
+@export var disable_ai = false
 var is_attacking = false
 var current_target_position = Vector2.ZERO
 
@@ -32,6 +33,8 @@ func _ready():
 
 
 func _process(delta):
+	if (disable_ai):
+		return
 	acquire_target_position()
 	var player = get_tree().get_first_node_in_group("player") as Player
 	var movement_direction = global_position.direction_to(current_target_position)

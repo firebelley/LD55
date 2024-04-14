@@ -20,10 +20,16 @@ func _ready():
 	level_timer.timeout.connect(on_level_timer_timeout)
 	spawn_timer.timeout.connect(on_spawn_timer_timeout)
 	
-	level_timer.wait_time = total_level_time
-	level_timer.start()
-	spawn_timer.wait_time = total_level_time / total_enemies_to_spawn 
-	spawn_timer.start()
+	if (total_level_time > 0):
+		level_timer.wait_time = total_level_time
+		level_timer.start()
+	else:
+		is_finished = true
+	
+	var spawn_timer_time = total_level_time / total_enemies_to_spawn
+	if (spawn_timer_time > 0):
+		spawn_timer.wait_time = total_level_time / total_enemies_to_spawn 
+		spawn_timer.start()
 
 
 func _process(_delta):
@@ -51,8 +57,8 @@ func on_level_timer_timeout():
 	
 
 func on_spawn_timer_timeout():
-	if (level_timer.is_stopped()):
-		return
+	if (!level_timer.is_stopped()):
+		spawn_timer.start()
 	
 	spawn()
-	spawn_timer.start()
+	

@@ -20,9 +20,19 @@ func advance_level():
 			child.queue_free()
 		
 	level_scene.level_finished.connect(on_level_finished)
+	level_scene.level_failed.connect(on_level_failed)
 
 	add_child(level_scene)
 
 
+func restart_level():
+	level_index -= 1
+	advance_level()
+
+
 func on_level_finished():
 	advance_level()
+
+
+func on_level_failed():
+	restart_level.call_deferred()

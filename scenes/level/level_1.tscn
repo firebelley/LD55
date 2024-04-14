@@ -1,11 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://dl2oyp16okd77"]
+[gd_scene load_steps=4 format=3 uid="uid://dl2oyp16okd77"]
 
 [ext_resource type="PackedScene" uid="uid://x4cbaf3cuh3l" path="res://scenes/level/base_level.tscn" id="1_rc7rq"]
 [ext_resource type="PackedScene" uid="uid://bt2xr3v0vltbj" path="res://scenes/game_object/enemy_tank/enemy_tank.tscn" id="2_q3a2x"]
+[ext_resource type="PackedScene" uid="uid://bbmm6vh40u6kh" path="res://scenes/game_object/enemy/enemy.tscn" id="2_v5daw"]
 
 [node name="Level1" instance=ExtResource("1_rc7rq")]
 
 [node name="SpawnComponent" parent="." index="0"]
 total_enemies_to_spawn = 7
-total_level_time = 15.0
 enemy_scenes = Array[PackedScene]([ExtResource("2_q3a2x")])
+
+[node name="Player" parent="Entities" index="0"]
+position = Vector2(160, 175)
+
+[node name="Skull" parent="Entities" index="1"]
+position = Vector2(288, 128)
+
+[node name="Enemy" parent="Entities" index="2" instance=ExtResource("2_v5daw")]
+position = Vector2(384, 178)
+disable_ai = true

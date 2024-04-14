@@ -1,16 +1,29 @@
-[gd_scene load_steps=6 format=3 uid="uid://x4cbaf3cuh3l"]
+[gd_scene load_steps=8 format=3 uid="uid://x4cbaf3cuh3l"]
 
 [ext_resource type="Script" path="res://scenes/level/base_level.gd" id="1_bivv4"]
 [ext_resource type="PackedScene" uid="uid://b7god42nq0ryl" path="res://scenes/component/spawn_component.tscn" id="1_snn1i"]
 [ext_resource type="TileSet" uid="uid://dv5pa1ptc33ql" path="res://resources/tileset.tres" id="2_j8mvv"]
 [ext_resource type="PackedScene" uid="uid://c1njxr3x6rjoa" path="res://scenes/game_object/player/player.tscn" id="3_oo5bi"]
+[ext_resource type="Script" path="res://addons/node_library/scripts/shaky_camera_2d.gd" id="3_xblbt"]
 [ext_resource type="PackedScene" uid="uid://67cdogwg7bjc" path="res://scenes/game_object/skull/skull.tscn" id="4_rvq4b"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5wrr3"]
+noise_type = 3
+seed = -251960452
+fractal_octaves = 1
 
 [node name="BaseLevel" type="Node"]
 script = ExtResource("1_bivv4")
 
 [node name="SpawnComponent" parent="." node_paths=PackedStringArray("spawn_area") instance=ExtResource("1_snn1i")]
 spawn_area = NodePath("../ReferenceRect")
+
+[node name="ShakyCamera2D" type="Camera2D" parent="." groups=["camera"]]
+anchor_mode = 0
+script = ExtResource("3_xblbt")
+shake_noise = SubResource("FastNoiseLite_5wrr3")
+max_shake_offset = 8.0
+frequency_multiplier = 1500.0
 
 [node name="ReferenceRect" type="ReferenceRect" parent="."]
 custom_minimum_size = Vector2(384, 0)
@@ -30,6 +43,7 @@ layer_0/tile_data = PackedInt32Array(655360, 0, 0, 655379, 65536, 0, 589843, 655
 y_sort_enabled = true
 
 [node name="Player" parent="Entities" instance=ExtResource("3_oo5bi")]
+unique_name_in_owner = true
 position = Vector2(253, 179)
 
 [node name="Skull" parent="Entities" instance=ExtResource("4_rvq4b")]

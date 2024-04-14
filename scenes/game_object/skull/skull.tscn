@@ -15,7 +15,7 @@ tracks/0/path = NodePath("GPUParticles2D:emitting")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 0.75),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -27,7 +27,7 @@ tracks/1/path = NodePath("Visuals:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 0.75),
 "transitions": PackedFloat32Array(2.21914, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, -26)]
@@ -51,7 +51,7 @@ tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(1, 2),
+"times": PackedFloat32Array(0.75, 2),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
@@ -68,7 +68,7 @@ tracks/4/path = NodePath("Visuals:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.75),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
