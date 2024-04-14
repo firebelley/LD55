@@ -12,19 +12,19 @@
 [node name="EnemySpawnDefinitionComponent" parent="SpawnComponent" index="0" instance=ExtResource("2_rcmaq")]
 spawn_lifetime = 90.0
 enemy_scene = ExtResource("3_fcur6")
-total_to_spawn = 35
+total_to_spawn = 32
 
 [node name="EnemySpawnDefinitionComponent2" parent="SpawnComponent" index="1" instance=ExtResource("2_rcmaq")]
 spawn_lifetime = 60.0
 spawn_begin_delay = 30.0
 enemy_scene = ExtResource("4_1qpyq")
-total_to_spawn = 10
+total_to_spawn = 8
 
 [node name="EnemySpawnDefinitionComponent3" parent="SpawnComponent" index="2" instance=ExtResource("2_rcmaq")]
 spawn_lifetime = 70.0
 spawn_begin_delay = 20.0
 enemy_scene = ExtResource("5_fm0vw")
-total_to_spawn = 8
+total_to_spawn = 7
 
 [node name="Player" parent="Entities" index="0"]
 position = Vector2(320, 224)
