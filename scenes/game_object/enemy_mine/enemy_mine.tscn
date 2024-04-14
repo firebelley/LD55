@@ -1,0 +1,88 @@
+[gd_scene load_steps=8 format=3 uid="uid://bf8ffs6cep4u6"]
+
+[ext_resource type="PackedScene" uid="uid://bepn3wm1qex72" path="res://scenes/effect/enemy_spawn_particles.tscn" id="1_86uns"]
+[ext_resource type="Texture2D" uid="uid://buo8oqur1cm72" path="res://assets/mine/mine.png" id="1_avoxs"]
+[ext_resource type="Script" path="res://scenes/game_object/enemy_mine/enemy_mine.gd" id="1_xd7ih"]
+
+[sub_resource type="Animation" id="Animation_7l6mt"]
+resource_name = "spawn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(5.65685, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1.2, 1.2), Vector2(0.9, 0.9), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_d5lg1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cyhax"]
+_data = {
+"RESET": SubResource("Animation_d5lg1"),
+"spawn": SubResource("Animation_7l6mt")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qgmc6"]
+
+[node name="EnemyMine" type="Node2D"]
+script = ExtResource("1_xd7ih")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_cyhax")
+}
+autoplay = "spawn"
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 20
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_qgmc6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_avoxs")
+
+[node name="EnemySpawnParticles" parent="." instance=ExtResource("1_86uns")]

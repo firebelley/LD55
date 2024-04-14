@@ -1,0 +1,168 @@
+[gd_scene load_steps=15 format=3 uid="uid://d2hgjmvr84i0r"]
+
+[ext_resource type="Script" path="res://scenes/game_object/enemy_mine/mine_explosion.gd" id="1_0c6x2"]
+[ext_resource type="Texture2D" uid="uid://c7m5lpjo11u7t" path="res://assets/effect/smoke.png" id="1_xo006"]
+[ext_resource type="Script" path="res://addons/node_library/scripts/random_audio_stream_player.gd" id="2_r61hg"]
+[ext_resource type="AudioStream" uid="uid://bx0ybyuox3ytf" path="res://audio/explosion.wav" id="3_q4rrg"]
+
+[sub_resource type="Animation" id="Animation_4pax8"]
+resource_name = "default"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Area2D/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RandomAudioStreamPlayer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_random"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_n1g70"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Area2D/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5e6mh"]
+_data = {
+"RESET": SubResource("Animation_n1g70"),
+"default": SubResource("Animation_4pax8")
+}
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_kjpfb"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_olvru"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.32337, 0.6875)
+colors = PackedColorArray(0.819608, 0.266667, 0.266667, 1, 0.890196, 0.780392, 0.176471, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_j641m"]
+gradient = SubResource("Gradient_olvru")
+
+[sub_resource type="Curve" id="Curve_6pqn1"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0945559, 1), 0.0, 0.0, 0, 0, Vector2(0.518625, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_4x3rc"]
+curve = SubResource("Curve_6pqn1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_grsg8"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 8.0
+direction = Vector3(0, -1, 0)
+spread = 120.0
+initial_velocity_min = 100.0
+initial_velocity_max = 300.0
+angular_velocity_min = -360.0
+angular_velocity_max = 360.0
+gravity = Vector3(0, -20, 0)
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_4x3rc")
+color_initial_ramp = SubResource("GradientTexture1D_j641m")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_enqc5"]
+radius = 48.0
+
+[node name="MineExplosion" type="Node2D"]
+script = ExtResource("1_0c6x2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5e6mh")
+}
+autoplay = "default"
+
+[node name="RandomAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"sfx"
+script = ExtResource("2_r61hg")
+streams = Array[AudioStream]([ExtResource("3_q4rrg")])
+db_variation_minimum = -4.0
+db_variation_maximum = -2.0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_kjpfb")
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_grsg8")
+texture = ExtResource("1_xo006")
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.9
+fixed_fps = 0
+interpolate = false
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 512
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_enqc5")

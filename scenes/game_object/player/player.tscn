@@ -259,8 +259,8 @@ position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_dj8pn")
 
 [node name="Hitbox" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 128
+collision_layer = 4
+collision_mask = 640
 
 [node name="HitboxCollisionShape" type="CollisionShape2D" parent="Hitbox"]
 unique_name_in_owner = true

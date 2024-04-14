@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://bkkne5jalx5bt"]
+
+[ext_resource type="PackedScene" uid="uid://x4cbaf3cuh3l" path="res://scenes/level/base_level.tscn" id="1_dwixj"]
+[ext_resource type="PackedScene" uid="uid://b7nqa2q762wpf" path="res://scenes/component/enemy_spawn_definition_component.tscn" id="2_rcmaq"]
+[ext_resource type="PackedScene" uid="uid://bbmm6vh40u6kh" path="res://scenes/game_object/enemy/enemy.tscn" id="3_fcur6"]
+[ext_resource type="PackedScene" uid="uid://bf8ffs6cep4u6" path="res://scenes/game_object/enemy_mine/enemy_mine.tscn" id="4_1qpyq"]
+[ext_resource type="PackedScene" uid="uid://bt2xr3v0vltbj" path="res://scenes/game_object/enemy_tank/enemy_tank.tscn" id="5_fm0vw"]
+[ext_resource type="PackedScene" uid="uid://67cdogwg7bjc" path="res://scenes/game_object/skull/skull.tscn" id="6_0chtd"]
+
+[node name="Level7" instance=ExtResource("1_dwixj")]
+
+[node name="EnemySpawnDefinitionComponent" parent="SpawnComponent" index="0" instance=ExtResource("2_rcmaq")]
+spawn_lifetime = 90.0
+enemy_scene = ExtResource("3_fcur6")
+total_to_spawn = 35
+
+[node name="EnemySpawnDefinitionComponent2" parent="SpawnComponent" index="1" instance=ExtResource("2_rcmaq")]
+spawn_lifetime = 60.0
+spawn_begin_delay = 30.0
+enemy_scene = ExtResource("4_1qpyq")
+total_to_spawn = 10
+
+[node name="EnemySpawnDefinitionComponent3" parent="SpawnComponent" index="2" instance=ExtResource("2_rcmaq")]
+spawn_lifetime = 70.0
+spawn_begin_delay = 20.0
+enemy_scene = ExtResource("5_fm0vw")
+total_to_spawn = 8
+
+[node name="Player" parent="Entities" index="0"]
+position = Vector2(320, 224)
+
+[node name="Skull" parent="Entities" index="1"]
+position = Vector2(320, 96)
+
+[node name="Skull2" parent="Entities" index="2" instance=ExtResource("6_0chtd")]
+position = Vector2(160, 256)
+
+[node name="Skull3" parent="Entities" index="3" instance=ExtResource("6_0chtd")]
+position = Vector2(512, 256)

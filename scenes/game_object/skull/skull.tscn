@@ -162,7 +162,7 @@ particles_anim_loop = false
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0945559, 1), 0.0, 0.0, 0, 0, Vector2(0.518625, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
-[sub_resource type="CurveTexture" id="CurveTexture_f5bux"]
+[sub_resource type="CurveTexture" id="CurveTexture_7dgfg"]
 curve = SubResource("Curve_hwpd8")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_78o50"]
@@ -178,7 +178,7 @@ angular_velocity_max = 360.0
 gravity = Vector3(0, -20, 0)
 scale_min = 0.5
 scale_max = 1.25
-scale_curve = SubResource("CurveTexture_f5bux")
+scale_curve = SubResource("CurveTexture_7dgfg")
 
 [node name="Skull" type="CharacterBody2D"]
 collision_layer = 0

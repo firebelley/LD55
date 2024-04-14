@@ -114,24 +114,34 @@ func acquire_target_position():
 	target_acquisition_timer.start_random()
 
 
+func kill():
+	var death_particles = death_particles_scene.instantiate() as Node2D
+	get_tree().get_first_node_in_group("entities").add_child(death_particles)
+	death_particles.global_position = centerMarker.global_position
+	queue_free()
+	GlobalThings.emit_enemy_killed()
+	GlobalThings.shake_camera()
+
+
 func on_area_entered(other_area: Area2D):
+	var explosion = other_area.owner as MineExplosion
+	if (explosion != null):
+		kill()
+		return
+	
 	var skeleton = other_area.owner as Skeleton
 	if (skeleton == null):
 		return
 	
 	if (!stun_timer.is_stopped()):
-		var death_particles = death_particles_scene.instantiate() as Node2D
-		get_tree().get_first_node_in_group("entities").add_child(death_particles)
-		death_particles.global_position = centerMarker.global_position
-		queue_free()
-		GlobalThings.emit_enemy_killed()
+		kill()
 	else:
 		stun_timer.start()
 		animation_player.play("RESET")
 		animation_player.play("stun")
 		$RandomAudioStreamPlayer.play_random()
+		GlobalThings.shake_camera()
 
-	GlobalThings.shake_camera()
 
 
 func on_attack_timer_timeout():

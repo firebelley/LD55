@@ -9,15 +9,15 @@
 [node name="Level5" instance=ExtResource("1_p0bvo")]
 
 [node name="EnemySpawnDefinitionComponent" parent="SpawnComponent" index="0" instance=ExtResource("4_eblfd")]
-spawn_lifetime = 35.0
+spawn_lifetime = 25.0
 enemy_scene = ExtResource("2_vfiol")
-total_to_spawn = 15
+total_to_spawn = 10
 
 [node name="EnemySpawnDefinitionComponent2" parent="SpawnComponent" index="1" instance=ExtResource("4_eblfd")]
-spawn_lifetime = 30.0
-spawn_begin_delay = 15.0
+spawn_lifetime = 15.0
+spawn_begin_delay = 5.0
 enemy_scene = ExtResource("3_krge6")
-total_to_spawn = 4
+total_to_spawn = 3
 
 [node name="Skull2" parent="Entities" index="2" instance=ExtResource("5_4a08h")]
 position = Vector2(160, 256)

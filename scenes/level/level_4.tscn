@@ -16,7 +16,7 @@ total_to_spawn = 2
 position = Vector2(320, 192)
 
 [node name="Skull" parent="Entities" index="1"]
-position = Vector2(448, 192)
+position = Vector2(448, 225)
 
 [node name="Skull2" parent="Entities" index="2" instance=ExtResource("3_maw0u")]
-position = Vector2(192, 192)
+position = Vector2(192, 225)
