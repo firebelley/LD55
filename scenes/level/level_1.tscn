@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b7nqa2q762wpf" path="res://scenes/component/enemy_spawn_definition_component.tscn" id="3_vkr7g"]
 
 [node name="Level1" instance=ExtResource("1_rc7rq")]
+hide_intro_banner = true
 
 [node name="EnemySpawnDefinitionComponent" parent="SpawnComponent" index="0" instance=ExtResource("3_vkr7g")]
 enemy_scene = ExtResource("2_v5daw")

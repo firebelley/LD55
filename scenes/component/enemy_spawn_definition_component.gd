@@ -13,7 +13,8 @@ extends Node
 var is_finished = false
 var total_spawned = 0
 
-func _ready():
+
+func start():
 	spawn_timer.timeout.connect(on_spawn_timer_timeout)
 	start_delay_timer.timeout.connect(on_start_delay_timeout)
 	

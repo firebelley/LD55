@@ -19,5 +19,14 @@ func _process(_delta):
 	var enemies_dead = get_tree().get_nodes_in_group("enemy").size() == 0
 		
 	if (all_finished && enemies_dead):
-		finished.emit()
 		is_finished = true
+		get_tree().create_timer(1).timeout.connect(on_timer_timeout)
+
+
+func start():
+	for child in get_children():
+		child.start()
+
+
+func on_timer_timeout():
+	finished.emit()

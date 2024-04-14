@@ -12,9 +12,13 @@ func advance_level():
 	if (level_sequence.size() <= level_index):
 		return
 	
+	if (level_index > 0):
+		ScreenTransition.transition()
+		await ScreenTransition.transitioned_halfway
+		
 	var level_scene = level_sequence[level_index].instantiate() as BaseLevel
 	level_index += 1
-	
+
 	for child in get_children():
 		if child is BaseLevel:
 			remove_child(child)
