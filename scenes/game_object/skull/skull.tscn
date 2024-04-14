@@ -1,8 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://67cdogwg7bjc"]
+[gd_scene load_steps=15 format=3 uid="uid://67cdogwg7bjc"]
 
 [ext_resource type="Script" path="res://scenes/game_object/skull/skull.gd" id="1_2hv60"]
 [ext_resource type="Texture2D" uid="uid://bfdujrs20vw1k" path="res://assets/skull/skull.png" id="1_6iv3w"]
+[ext_resource type="Script" path="res://addons/node_library/scripts/random_audio_stream_player.gd" id="2_yfbtn"]
 [ext_resource type="Texture2D" uid="uid://c7m5lpjo11u7t" path="res://assets/effect/smoke.png" id="3_m3obm"]
+[ext_resource type="AudioStream" uid="uid://rejp6hc4s7jo" path="res://audio/summon.wav" id="3_ngr2s"]
 
 [sub_resource type="Animation" id="Animation_gnkxn"]
 tracks/0/type = "value"
@@ -123,6 +125,20 @@ tracks/4/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("RandomAudioStreamPlayer")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_random"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nnm2s"]
 _data = {
@@ -173,6 +189,14 @@ script = ExtResource("1_2hv60")
 libraries = {
 "": SubResource("AnimationLibrary_nnm2s")
 }
+
+[node name="RandomAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"sfx"
+script = ExtResource("2_yfbtn")
+streams = Array[AudioStream]([ExtResource("3_ngr2s")])
+randomize_pitch = true
+db_variation_minimum = -6.0
+db_variation_maximum = -4.0
 
 [node name="Visuals" type="Node2D" parent="."]
 

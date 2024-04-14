@@ -1,7 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://iwxqjbegpfeg"]
+[gd_scene load_steps=18 format=3 uid="uid://iwxqjbegpfeg"]
 
 [ext_resource type="Texture2D" uid="uid://c7m5lpjo11u7t" path="res://assets/effect/smoke.png" id="1_j46cr"]
+[ext_resource type="AudioStream" uid="uid://bunraxx51t7s2" path="res://audio/death.wav" id="1_tlly5"]
+[ext_resource type="Script" path="res://addons/node_library/scripts/random_audio_stream_player.gd" id="1_xw7xb"]
+[ext_resource type="AudioStream" uid="uid://c0d0ku1kujtcd" path="res://audio/hit-2.wav" id="2_dgnfd"]
 [ext_resource type="Texture2D" uid="uid://caqw31l64qr0o" path="res://assets/effect/player_strip.png" id="2_qial3"]
+[ext_resource type="AudioStream" uid="uid://brut0odjdo3th" path="res://audio/hit.wav" id="3_4hxbp"]
 
 [sub_resource type="Animation" id="Animation_vp8h3"]
 resource_name = "default"
@@ -41,6 +45,20 @@ tracks/2/keys = {
 "values": [{
 "args": [],
 "method": &"queue_free"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RandomAudioStreamPlayer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_random"
 }]
 }
 
@@ -141,6 +159,19 @@ libraries = {
 "": SubResource("AnimationLibrary_e8axk")
 }
 autoplay = "default"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_tlly5")
+autoplay = true
+bus = &"sfx"
+
+[node name="RandomAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"sfx"
+script = ExtResource("1_xw7xb")
+streams = Array[AudioStream]([ExtResource("2_dgnfd"), ExtResource("3_4hxbp")])
+randomize_pitch = true
+db_variation_maximum = 0.0
+default_play_times = 2
 
 [node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_qhb4w")

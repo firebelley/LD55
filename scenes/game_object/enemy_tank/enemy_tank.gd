@@ -123,6 +123,7 @@ func on_area_entered(other_area: Area2D):
 		stun_timer.start()
 		animation_player.play("RESET")
 		animation_player.play("stun")
+		$RandomAudioStreamPlayer.play_random()
 
 	GlobalThings.shake_camera()
 

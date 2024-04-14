@@ -1,9 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://bt2xr3v0vltbj"]
+[gd_scene load_steps=17 format=3 uid="uid://bt2xr3v0vltbj"]
 
 [ext_resource type="Texture2D" uid="uid://chu26joch3i5g" path="res://assets/enemy_tank/head.png" id="1_68ggd"]
 [ext_resource type="Script" path="res://scenes/game_object/enemy_tank/enemy_tank.gd" id="1_ggktp"]
 [ext_resource type="Texture2D" uid="uid://ck83lqcbmap4i" path="res://assets/enemy_tank/body.png" id="2_ingxs"]
 [ext_resource type="Script" path="res://addons/node_library/scripts/random_timer.gd" id="2_lpalb"]
+[ext_resource type="Script" path="res://addons/node_library/scripts/random_audio_stream_player.gd" id="3_p6ivy"]
+[ext_resource type="AudioStream" uid="uid://c0d0ku1kujtcd" path="res://audio/hit-2.wav" id="4_hhe80"]
 [ext_resource type="Texture2D" uid="uid://c12p3aaab5q32" path="res://assets/enemy_tank/arm_right.png" id="4_nmug6"]
 [ext_resource type="Texture2D" uid="uid://cxss0dll0xpqh" path="res://assets/enemy_tank/arm.png" id="5_wl6u6"]
 [ext_resource type="PackedScene" uid="uid://bepn3wm1qex72" path="res://scenes/effect/enemy_spawn_particles.tscn" id="7_auueg"]
@@ -223,6 +225,15 @@ one_shot = true
 [node name="StunTimer" type="Timer" parent="."]
 wait_time = 1.5
 one_shot = true
+
+[node name="RandomAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"sfx"
+script = ExtResource("3_p6ivy")
+streams = Array[AudioStream]([ExtResource("4_hhe80")])
+randomize_pitch = true
+db_variation_maximum = 0.0
+max_playing = 2
+max_playing_id = "enemy_death_hit"
 
 [node name="CenterMarker2D" type="Marker2D" parent="."]
 position = Vector2(0, -12)

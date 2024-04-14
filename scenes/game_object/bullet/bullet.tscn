@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://d0sjc74un2pby"]
+[gd_scene load_steps=7 format=3 uid="uid://d0sjc74un2pby"]
 
 [ext_resource type="Script" path="res://scenes/game_object/bullet/bullet.gd" id="1_n3ba4"]
 [ext_resource type="Texture2D" uid="uid://cwfdv40qlp526" path="res://assets/effect/bullet.png" id="1_v120m"]
+[ext_resource type="Script" path="res://addons/node_library/scripts/random_audio_stream_player.gd" id="3_oomhh"]
+[ext_resource type="AudioStream" uid="uid://d0igrlc306oqp" path="res://audio/blaster.wav" id="4_had68"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vexvn"]
 radius = 8.0
@@ -13,6 +15,15 @@ radius = 5.0
 collision_layer = 0
 motion_mode = 1
 script = ExtResource("1_n3ba4")
+
+[node name="RandomAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"sfx"
+script = ExtResource("3_oomhh")
+streams = Array[AudioStream]([ExtResource("4_had68")])
+randomize_pitch = true
+db_variation_maximum = 0.0
+max_playing = 3
+max_playing_id = "bullet"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_v120m")

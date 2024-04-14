@@ -10,6 +10,7 @@ const SPEED = 150
 
 func _ready():
 	area.area_entered.connect(on_area_entered)
+	$RandomAudioStreamPlayer.play_random()
 
 
 func _process(_delta):

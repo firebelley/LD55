@@ -104,6 +104,8 @@ func create_launch_area():
 	foreground.add_child(particles)
 	
 	play_dodge()
+	
+	$RandomAudioStreamPlayer.play_random()
 
 
 func on_hitbox_area_entered(area: Area2D):

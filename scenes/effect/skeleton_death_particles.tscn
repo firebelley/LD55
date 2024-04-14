@@ -1,6 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dlgq15u46lnld"]
+[gd_scene load_steps=12 format=3 uid="uid://dlgq15u46lnld"]
 
 [ext_resource type="Texture2D" uid="uid://73bkfqgj6crg" path="res://assets/effect/skeleton_strip.png" id="1_achqv"]
+[ext_resource type="Script" path="res://scenes/effect/skeleton_death_particles.gd" id="2_31ik6"]
+[ext_resource type="Script" path="res://addons/node_library/scripts/random_audio_stream_player.gd" id="2_abv3f"]
+[ext_resource type="AudioStream" uid="uid://brut0odjdo3th" path="res://audio/hit.wav" id="3_x5wjl"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w7quq"]
 particles_animation = true
@@ -90,9 +93,20 @@ one_shot = true
 explosiveness = 0.9
 fixed_fps = 0
 interpolate = false
+script = ExtResource("2_31ik6")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_1fy84")
 }
 autoplay = "default"
+
+[node name="RandomAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"sfx"
+script = ExtResource("2_abv3f")
+streams = Array[AudioStream]([ExtResource("3_x5wjl")])
+randomize_pitch = true
+db_variation_minimum = -4.0
+db_variation_maximum = -2.0
+max_playing = 2
+max_playing_id = "skeleton_death"

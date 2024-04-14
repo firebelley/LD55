@@ -1,8 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://c1njxr3x6rjoa"]
+[gd_scene load_steps=17 format=3 uid="uid://c1njxr3x6rjoa"]
 
 [ext_resource type="Script" path="res://scenes/game_object/player/player.gd" id="1_pglt4"]
+[ext_resource type="Script" path="res://addons/node_library/scripts/random_audio_stream_player.gd" id="2_xpog0"]
 [ext_resource type="Texture2D" uid="uid://bwnh4da4be3up" path="res://assets/player/head.png" id="2_ylwyp"]
 [ext_resource type="Texture2D" uid="uid://diaspnpprvpbt" path="res://assets/player/body.png" id="3_2c0rn"]
+[ext_resource type="AudioStream" uid="uid://dc0scflpvmrlp" path="res://audio/push.wav" id="3_hwweq"]
 [ext_resource type="Texture2D" uid="uid://cmic6s4wr4esg" path="res://assets/player/arm_left.png" id="4_0tj38"]
 [ext_resource type="Texture2D" uid="uid://p6xal0aanef0" path="res://assets/player/arm_right.png" id="5_gqdsd"]
 
@@ -243,6 +245,14 @@ libraries = {
 [node name="DodgeTimer" type="Timer" parent="."]
 wait_time = 0.3
 one_shot = true
+
+[node name="RandomAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"sfx"
+script = ExtResource("2_xpog0")
+streams = Array[AudioStream]([ExtResource("3_hwweq")])
+randomize_pitch = true
+db_variation_minimum = -4.0
+db_variation_maximum = -2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -6)

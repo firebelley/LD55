@@ -1,7 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://baoq1gms6uu5q"]
+[gd_scene load_steps=16 format=3 uid="uid://baoq1gms6uu5q"]
 
+[ext_resource type="Script" path="res://scenes/effect/enemy_death_particles.gd" id="1_0gjhm"]
 [ext_resource type="Texture2D" uid="uid://c7m5lpjo11u7t" path="res://assets/effect/smoke.png" id="1_7x2cg"]
 [ext_resource type="Texture2D" uid="uid://b6bgtp2kvtm05" path="res://assets/effect/enemy_strip.png" id="1_nsigx"]
+[ext_resource type="Script" path="res://addons/node_library/scripts/random_audio_stream_player.gd" id="3_pya7e"]
+[ext_resource type="AudioStream" uid="uid://c0d0ku1kujtcd" path="res://audio/hit-2.wav" id="4_3nch7"]
 
 [sub_resource type="Animation" id="Animation_orkpt"]
 length = 0.001
@@ -131,6 +134,7 @@ scale_curve = SubResource("CurveTexture_r6jy7")
 anim_offset_max = 1.0
 
 [node name="EnemyDeathParticles" type="Node2D"]
+script = ExtResource("1_0gjhm")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -161,3 +165,12 @@ one_shot = true
 explosiveness = 0.9
 fixed_fps = 0
 interpolate = false
+
+[node name="RandomAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"sfx"
+script = ExtResource("3_pya7e")
+streams = Array[AudioStream]([ExtResource("4_3nch7")])
+randomize_pitch = true
+db_variation_maximum = 0.0
+max_playing = 2
+max_playing_id = "enemy_death_hit"
