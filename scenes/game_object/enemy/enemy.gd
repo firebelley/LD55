@@ -108,11 +108,13 @@ func on_area_entered(other_area: Area2D):
 	if (skeleton == null):
 		return
 	
-	GlobalThings.shake_camera()
 	var death_particles = death_particles_scene.instantiate() as Node2D
 	get_tree().get_first_node_in_group("entities").add_child(death_particles)
 	death_particles.global_position = centerMarker.global_position
 	queue_free()
+	
+	GlobalThings.shake_camera()
+	GlobalThings.emit_enemy_killed()
 
 
 func on_attack_timer_timeout():

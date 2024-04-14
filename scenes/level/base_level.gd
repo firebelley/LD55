@@ -9,6 +9,7 @@ signal level_failed
 
 @onready var spawn_component: SpawnComponent = $SpawnComponent
 @onready var player: Player = %Player
+@onready var level_label: Label = %LevelLabel
 
 const message_banner_scene = preload("res://scenes/ui/message_banner.tscn")
 
@@ -29,6 +30,10 @@ func _ready():
 func start_spawning():
 	await get_tree().create_timer(.5).timeout
 	spawn_component.start()
+
+
+func update_level_label(level_index: int):
+	level_label.text = "Level " + str(level_index + 1) + "/5"
 
 
 func on_finished():

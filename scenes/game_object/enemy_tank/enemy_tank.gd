@@ -113,17 +113,18 @@ func on_area_entered(other_area: Area2D):
 	if (skeleton == null):
 		return
 	
-	GlobalThings.shake_camera()
-	
 	if (!stun_timer.is_stopped()):
 		var death_particles = death_particles_scene.instantiate() as Node2D
 		get_tree().get_first_node_in_group("entities").add_child(death_particles)
 		death_particles.global_position = centerMarker.global_position
 		queue_free()
+		GlobalThings.emit_enemy_killed()
 	else:
 		stun_timer.start()
 		animation_player.play("RESET")
 		animation_player.play("stun")
+
+	GlobalThings.shake_camera()
 
 
 func on_attack_timer_timeout():

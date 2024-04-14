@@ -26,8 +26,9 @@ func advance_level():
 		
 	level_scene.level_finished.connect(on_level_finished)
 	level_scene.level_failed.connect(on_level_failed)
-
 	add_child(level_scene)
+
+	level_scene.update_level_label(level_index - 1)
 
 
 func restart_level():
