@@ -9,7 +9,6 @@ const LAUNCH_SPEED = 500
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
-var skull_scene = preload("res://scenes/game_object/skull/skull.tscn")
 var death_particles_scene = preload("res://scenes/effect/skeleton_death_particles.tscn")
 var is_destroying = false
 
@@ -29,6 +28,7 @@ func _process(_delta):
 func destroy(start_velocity: Vector2):
 	var entities = get_tree().get_first_node_in_group("entities")
 	
+	var skull_scene = load("res://scenes/game_object/skull/skull.tscn")
 	var skull = skull_scene.instantiate() as Skull
 	skull.global_position = global_position
 	entities.add_child(skull)

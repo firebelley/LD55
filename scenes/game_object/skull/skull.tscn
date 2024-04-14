@@ -1,7 +1,134 @@
-[gd_scene load_steps=5 format=3 uid="uid://67cdogwg7bjc"]
+[gd_scene load_steps=13 format=3 uid="uid://67cdogwg7bjc"]
 
 [ext_resource type="Script" path="res://scenes/game_object/skull/skull.gd" id="1_2hv60"]
 [ext_resource type="Texture2D" uid="uid://bfdujrs20vw1k" path="res://assets/skull/skull.png" id="1_6iv3w"]
+[ext_resource type="Texture2D" uid="uid://c7m5lpjo11u7t" path="res://assets/effect/smoke.png" id="3_m3obm"]
+
+[sub_resource type="Animation" id="Animation_mcneb"]
+resource_name = "summon"
+length = 2.0
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(2.21914, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -26)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PickupArea/PickupAreaShape:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1, 2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"summon_skeleton"
+}, {
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Visuals:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_gnkxn"]
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PickupArea/PickupAreaShape:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visuals:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nnm2s"]
+_data = {
+"RESET": SubResource("Animation_gnkxn"),
+"summon": SubResource("Animation_mcneb")
+}
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sqvij"]
 radius = 6.0
@@ -9,12 +136,47 @@ radius = 6.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_s4txh"]
 radius = 12.0
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xh5uc"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_hwpd8"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0945559, 1), 0.0, 0.0, 0, 0, Vector2(0.518625, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_f5bux"]
+curve = SubResource("Curve_hwpd8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_78o50"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 8.0
+direction = Vector3(0, -1, 0)
+spread = 15.0
+initial_velocity_min = 25.0
+initial_velocity_max = 100.0
+angular_velocity_min = -360.0
+angular_velocity_max = 360.0
+gravity = Vector3(0, -20, 0)
+scale_min = 0.5
+scale_max = 1.25
+scale_curve = SubResource("CurveTexture_f5bux")
+
 [node name="Skull" type="CharacterBody2D"]
 collision_layer = 0
 motion_mode = 1
 script = ExtResource("1_2hv60")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_nnm2s")
+}
+
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 texture = ExtResource("1_6iv3w")
 centered = false
 offset = Vector2(-8, -9)
@@ -23,8 +185,19 @@ offset = Vector2(-8, -9)
 shape = SubResource("CircleShape2D_sqvij")
 
 [node name="PickupArea" type="Area2D" parent="."]
-collision_layer = 32
-collision_mask = 0
+collision_layer = 0
+collision_mask = 32
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
+[node name="PickupAreaShape" type="CollisionShape2D" parent="PickupArea"]
 shape = SubResource("CircleShape2D_s4txh")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_xh5uc")
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_78o50")
+texture = ExtResource("3_m3obm")
+lifetime = 0.5
+explosiveness = 0.1
+fixed_fps = 0
+interpolate = false

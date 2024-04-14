@@ -8,8 +8,6 @@ const DODGE_SPEED = 800
 const DODGE_DECELERATION = 500
 
 
-const stored_skull_scene = preload("res://scenes/game_object/stored_skull/stored_skull.tscn")
-const skeleton_scene = preload("res://scenes/game_object/skeleton/skeleton.tscn")
 const skeleton_launch_area = preload("res://scenes/game_object/player/skeleton_launch_area.tscn")
 const push_particles = preload("res://scenes/effect/push_particles.tscn")
 
@@ -28,7 +26,7 @@ var dodge_direction = Vector2.ZERO
 
 func _ready():
 	dodge_timer.timeout.connect(on_dodge_timer_timeout)
-	skull_pickup_area.area_entered.connect(on_skull_pickup_area_entered)
+
 	hitbox.area_entered.connect(on_hitbox_area_entered)
 
 
@@ -89,12 +87,6 @@ func get_movement_vector() -> Vector2:
 	return Input.get_vector("move_left", "move_right", "move_up", "move_down")
 
 
-func summon_skeleton(at_position: Vector2):
-	var skeleton = skeleton_scene.instantiate()
-	skeleton.global_position = at_position
-	get_parent().add_child(skeleton)
-
-
 func create_launch_area():
 	var foreground = get_tree().get_first_node_in_group("foreground")
 	
@@ -109,11 +101,6 @@ func create_launch_area():
 	foreground.add_child(particles)
 	
 	play_dodge()
-
-
-func on_skull_pickup_area_entered(area: Area2D):
-	area.owner.queue_free()
-	summon_skeleton.call_deferred((area.owner as Node2D).global_position)
 
 
 func on_hitbox_area_entered(_area: Area2D):
