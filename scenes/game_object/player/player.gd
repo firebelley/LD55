@@ -116,6 +116,7 @@ func on_hitbox_area_entered(area: Area2D):
 	var particles = death_particles.instantiate() as Node2D
 	get_tree().get_first_node_in_group("entities").add_child(particles)
 	particles.global_position = center_marker.global_position
+	GlobalThings.shake_camera()
 	queue_free()
 
 
