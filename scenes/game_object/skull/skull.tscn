@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://67cdogwg7bjc"]
+[gd_scene load_steps=16 format=3 uid="uid://67cdogwg7bjc"]
 
 [ext_resource type="Script" path="res://scenes/game_object/skull/skull.gd" id="1_2hv60"]
 [ext_resource type="Texture2D" uid="uid://bfdujrs20vw1k" path="res://assets/skull/skull.png" id="1_6iv3w"]
@@ -50,6 +50,18 @@ tracks/3/path = NodePath("Visuals:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PushbackArea/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -139,6 +151,18 @@ tracks/5/keys = {
 "method": &"play_random"
 }]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("PushbackArea/CollisionShape2D:disabled")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nnm2s"]
 _data = {
@@ -179,6 +203,9 @@ gravity = Vector3(0, -20, 0)
 scale_min = 0.5
 scale_max = 1.25
 scale_curve = SubResource("CurveTexture_7dgfg")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_krrvw"]
+radius = 64.0
 
 [node name="Skull" type="CharacterBody2D"]
 collision_layer = 0
@@ -225,3 +252,11 @@ lifetime = 0.5
 explosiveness = 0.1
 fixed_fps = 0
 interpolate = false
+
+[node name="PushbackArea" type="Area2D" parent="."]
+collision_layer = 1024
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PushbackArea"]
+shape = SubResource("CircleShape2D_krrvw")
+disabled = true

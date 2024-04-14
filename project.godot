@@ -160,6 +160,7 @@ mute={
 2d_physics/layer_8="Bullet"
 2d_physics/layer_9="Skeleton"
 2d_physics/layer_10="Explosion"
+2d_physics/layer_11="PushbackArea"
 
 [rendering]
 

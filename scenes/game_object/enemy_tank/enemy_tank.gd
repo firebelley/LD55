@@ -18,7 +18,8 @@ const MAX_TARGET_DISTANCE = 200
 @onready var arm_left: Sprite2D = %ArmLeft
 @onready var barrel_marker: Marker2D = %BarrelMarker2D
 @onready var stun_timer: Timer = $StunTimer
-@onready var centerMarker: Marker2D = $CenterMarker2D
+@onready var center_marker: Marker2D = $CenterMarker2D
+@onready var pushback_timer: Timer = $PushbackTimer
 
 const bullet_scene = preload("res://scenes/game_object/bullet/bullet.tscn")
 const death_particles_scene = preload("res://scenes/effect/enemy_death_particles.tscn")
@@ -54,7 +55,7 @@ func _process(delta):
 		var new_rotation = arm_left.rotation
 		arm_left.rotation = lerp_angle(old_rotation, new_rotation, 1.0 - exp(-3 * delta))
 	
-	if (!is_attacking):
+	if (!is_attacking && pushback_timer.is_stopped()):
 		if (animation_player.current_animation != "run"):
 			animation_player.play("run")
 		velocity += movement_direction * ACCEL * delta
@@ -63,8 +64,8 @@ func _process(delta):
 			animation_player.play("RESET")
 		velocity = velocity.lerp(Vector2.ZERO, 1.0 - exp(-DECEL * delta))
 
-		
-	velocity = velocity.limit_length(MAX_SPEED)
+	if (pushback_timer.is_stopped()):
+		velocity = velocity.limit_length(MAX_SPEED)
 	
 	if (player != null):
 		var scale_mod = 1
@@ -117,13 +118,20 @@ func acquire_target_position():
 func kill():
 	var death_particles = death_particles_scene.instantiate() as Node2D
 	get_tree().get_first_node_in_group("entities").add_child(death_particles)
-	death_particles.global_position = centerMarker.global_position
+	death_particles.global_position = center_marker.global_position
 	queue_free()
 	GlobalThings.emit_enemy_killed()
 	GlobalThings.shake_camera()
 
 
 func on_area_entered(other_area: Area2D):
+	var skull = other_area.owner as Skull
+	if (skull != null):
+		var direction = skull.global_position.direction_to(center_marker.global_position)
+		velocity = direction * 550
+		pushback_timer.start()
+		return
+	
 	var explosion = other_area.owner as MineExplosion
 	if (explosion != null):
 		kill()
@@ -145,6 +153,9 @@ func on_area_entered(other_area: Area2D):
 
 
 func on_attack_timer_timeout():
+	if (!pushback_timer.is_stopped()):
+		attack_timer.start_random()
+		return
 	is_attacking = true
 	windup_timer.start()
 

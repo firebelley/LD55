@@ -226,6 +226,10 @@ one_shot = true
 wait_time = 2.0
 one_shot = true
 
+[node name="PushbackTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [node name="RandomAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 bus = &"sfx"
 script = ExtResource("3_p6ivy")
@@ -240,7 +244,7 @@ position = Vector2(0, -12)
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 8
-collision_mask = 528
+collision_mask = 1552
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, -18)

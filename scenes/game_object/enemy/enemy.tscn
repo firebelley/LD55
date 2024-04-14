@@ -176,6 +176,10 @@ max_wait_time = 0.5
 [node name="WindupTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="PushbackTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_pdaja")
@@ -219,7 +223,7 @@ position = Vector2(13, 1)
 [node name="Hitbox" type="Area2D" parent="."]
 visible = false
 collision_layer = 8
-collision_mask = 528
+collision_mask = 1552
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, -18)
