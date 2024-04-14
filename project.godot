@@ -38,13 +38,9 @@ gdscript/warnings/return_value_discarded=false
 
 window/size/viewport_width=640
 window/size/viewport_height=360
-window/size/mode=3
-window/size/borderless=true
 window/size/window_width_override=1920
 window/size/window_height_override=1080
 window/stretch/mode="viewport"
-window/size/mode.debug=0
-window/size/borderless.debug=false
 
 [dotnet]
 
