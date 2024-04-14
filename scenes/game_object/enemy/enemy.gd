@@ -22,6 +22,7 @@ const MAX_TARGET_DISTANCE = 200
 
 const death_particles_scene = preload("res://scenes/effect/enemy_death_particles.tscn")
 const bullet_scene = preload("res://scenes/game_object/bullet/bullet.tscn")
+const blaster_particles_scene = preload("res://scenes/effect/blaster_particles.tscn")
 
 
 @export var disable_ai = false
@@ -80,6 +81,11 @@ func attack():
 	foreground.add_child(bullet)
 	
 	var direction = Vector2.RIGHT.rotated(arm_right.global_rotation)
+	
+	var particles = blaster_particles_scene.instantiate() as Node2D
+	foreground.add_child(particles)
+	particles.global_position = bullet.global_position
+	particles.rotation = direction.angle()
 	
 	bullet.start(direction)
 

@@ -111,7 +111,8 @@ func create_launch_area():
 func on_hitbox_area_entered(area: Area2D):
 	var bullet = area.owner as Bullet
 	if (bullet != null):
-		bullet.destroy()
+		var direction = global_position.direction_to(bullet.global_position)
+		bullet.destroy(direction)
 
 	killed.emit()
 	
