@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://com112duvu6pe"]
+
+[ext_resource type="AudioStream" uid="uid://daaosey30d1s5" path="res://audio/Alien Invasion.mp3" id="1_tpxit"]
+
+[node name="MusicPlayer" type="Node"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_tpxit")
+volume_db = -8.0
+autoplay = true
+bus = &"music"

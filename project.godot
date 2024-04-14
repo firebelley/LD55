@@ -23,6 +23,7 @@ config/icon="res://icon.png"
 ScreenTransition="*res://addons/node_library/scenes/ScreenTransition.tscn"
 Visuals="*res://scenes/autoload/visuals.gd"
 GlobalThings="*res://scenes/autoload/global_things.gd"
+MusicPlayer="*res://scenes/autoload/music_player.tscn"
 
 [debug]
 
