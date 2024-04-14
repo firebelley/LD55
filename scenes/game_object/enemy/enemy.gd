@@ -17,8 +17,12 @@ const MAX_TARGET_DISTANCE = 200
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var arm_right: Sprite2D = %ArmRight
 @onready var barrel_marker: Marker2D = %BarrelMarker2D
+@onready var centerMarker: Marker2D = $CenterMarker2D
 
+
+const death_particles_scene = preload("res://scenes/effect/enemy_death_particles.tscn")
 const bullet_scene = preload("res://scenes/game_object/bullet/bullet.tscn")
+
 
 @export var disable_ai = false
 var is_attacking = false
@@ -105,6 +109,9 @@ func on_area_entered(other_area: Area2D):
 		return
 	
 	GlobalThings.shake_camera()
+	var death_particles = death_particles_scene.instantiate() as Node2D
+	get_tree().get_first_node_in_group("entities").add_child(death_particles)
+	death_particles.global_position = centerMarker.global_position
 	queue_free()
 
 

@@ -18,8 +18,10 @@ const MAX_TARGET_DISTANCE = 200
 @onready var arm_left: Sprite2D = %ArmLeft
 @onready var barrel_marker: Marker2D = %BarrelMarker2D
 @onready var stun_timer: Timer = $StunTimer
+@onready var centerMarker: Marker2D = $CenterMarker2D
 
 const bullet_scene = preload("res://scenes/game_object/bullet/bullet.tscn")
+const death_particles_scene = preload("res://scenes/effect/enemy_death_particles.tscn")
 
 var is_attacking = false
 var current_target_position = Vector2.ZERO
@@ -111,6 +113,9 @@ func on_area_entered(other_area: Area2D):
 	GlobalThings.shake_camera()
 	
 	if (!stun_timer.is_stopped()):
+		var death_particles = death_particles_scene.instantiate() as Node2D
+		get_tree().get_first_node_in_group("entities").add_child(death_particles)
+		death_particles.global_position = centerMarker.global_position
 		queue_free()
 	else:
 		stun_timer.start()
