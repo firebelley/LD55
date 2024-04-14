@@ -9,12 +9,33 @@
 [node name="EnemySpawnDefinitionComponent" parent="SpawnComponent" index="0" instance=ExtResource("3_vkr7g")]
 enemy_scene = ExtResource("2_v5daw")
 
+[node name="Label" type="Label" parent="." index="4"]
+offset_left = 89.0
+offset_top = 245.0
+offset_right = 229.0
+offset_bottom = 278.0
+text = "Walk to skull to summon
+using WASD"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="Label2" type="Label" parent="." index="5"]
+offset_left = 281.0
+offset_top = 74.0
+offset_right = 433.0
+offset_bottom = 107.0
+text = "Left click to push skeleton
+in mouse direction"
+horizontal_alignment = 1
+uppercase = true
+
 [node name="Player" parent="Entities" index="0"]
-position = Vector2(160, 175)
+position = Vector2(160, 214)
 
 [node name="Skull" parent="Entities" index="1"]
-position = Vector2(288, 128)
+position = Vector2(280, 195)
 
 [node name="Enemy" parent="Entities" index="2" instance=ExtResource("2_v5daw")]
-position = Vector2(384, 178)
+position = Vector2(458, 216)
+scale = Vector2(-1, 1)
 disable_ai = true
