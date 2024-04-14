@@ -28,5 +28,15 @@ func start():
 		child.start()
 
 
+func get_total_level_time():
+	var greatest_total_time = 0
+	for child in get_children():
+		var comp = child as EnemySpawnDefinitionComponent
+		if (comp != null):
+			var test_time = comp.spawn_begin_delay + comp.spawn_lifetime
+			greatest_total_time = max(greatest_total_time, test_time)
+	return greatest_total_time
+	
+
 func on_timer_timeout():
 	finished.emit()

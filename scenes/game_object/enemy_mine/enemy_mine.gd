@@ -15,6 +15,7 @@ func explode():
 	explosion.global_position = global_position
 	get_tree().get_first_node_in_group("foreground").add_child(explosion)
 
+	GlobalThings.shake_camera()
 	queue_free()
 
 

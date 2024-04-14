@@ -10,6 +10,8 @@ signal level_failed
 @onready var spawn_component: SpawnComponent = $SpawnComponent
 @onready var player: Player = %Player
 @onready var level_label: Label = %LevelLabel
+@onready var total_level_timer: Timer = $TotalLevelTimer
+@onready var timer_label: Label = %TimerLabel
 
 const message_banner_scene = preload("res://scenes/ui/message_banner.tscn")
 
@@ -17,6 +19,13 @@ const message_banner_scene = preload("res://scenes/ui/message_banner.tscn")
 func _ready():
 	spawn_component.finished.connect(on_finished)
 	player.killed.connect(on_player_killed)
+	
+	var total_time = spawn_component.get_total_level_time()
+	if (total_time > 0):
+		total_level_timer.wait_time = total_time
+		timer_label.text = str(ceil(total_level_timer.wait_time))
+	
+	set_process(false)
 	
 	if (!hide_intro_banner):
 		var message_banner = message_banner_scene.instantiate() as MessageBanner
@@ -27,13 +36,19 @@ func _ready():
 		start_spawning()
 
 
+func _process(_delta):
+	timer_label.text = str(ceil(total_level_timer.time_left))
+
+
 func start_spawning():
 	await get_tree().create_timer(.5).timeout
+	set_process(true)
+	total_level_timer.start()
 	spawn_component.start()
 
 
 func update_level_label(level_index: int):
-	level_label.text = "Level " + str(level_index + 1) + "/5"
+	level_label.text = "Level " + str(level_index + 1) + "/7"
 
 
 func on_finished():

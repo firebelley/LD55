@@ -7,6 +7,9 @@
 [node name="Level1" instance=ExtResource("1_rc7rq")]
 hide_intro_banner = true
 
+[node name="TimerLabel" parent="UI/MarginContainer/HBoxContainer2" index="1"]
+visible = false
+
 [node name="EnemySpawnDefinitionComponent" parent="SpawnComponent" index="0" instance=ExtResource("3_vkr7g")]
 enemy_scene = ExtResource("2_v5daw")
 
