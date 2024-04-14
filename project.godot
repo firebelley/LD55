@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="LD55"
+config/name="Aliens vs. Undead"
 run/main_scene="res://scenes/ui/introduction.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="Game"
@@ -35,10 +35,12 @@ gdscript/warnings/return_value_discarded=false
 window/size/viewport_width=640
 window/size/viewport_height=360
 window/size/mode=3
+window/size/borderless=true
 window/size/window_width_override=1920
 window/size/window_height_override=1080
 window/stretch/mode="viewport"
 window/size/mode.debug=0
+window/size/borderless.debug=false
 
 [dotnet]
 
